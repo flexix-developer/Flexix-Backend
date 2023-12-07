@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const healthCheckRouter = require('../healthcheck');
 
 const app = express();
 const port = 5000;
@@ -11,19 +12,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // MySQL Connection
 const db = mysql.createConnection({
-  host: 'localhost',
+  host: 'db',
   user: 'root',
-  password: '',
-  database: 'flexixdb',
+  password: 'root',
+  database: 'flexixdb'
 });
 
 db.connect((err) => {
   if (err) {
     console.error('Database connection failed: ' + err.stack);
-    return;
+    process.exit(1); // Terminate the application
   }
   console.log('Connected to database');
 });
+
 
 // CRUD Operations
 
@@ -56,10 +58,9 @@ app.get('/users', (req, res) => {
   const sql = 'SELECT * FROM users';
   db.query(sql, (err, results) => {
     if (err) {
-      console.error('Error fetching users:', err);
+      console.error('SQL error:', err);
       return res.status(500).send('Error fetching users');
     }
-
     res.status(200).json(results);
   });
 });
@@ -92,6 +93,9 @@ app.delete('/users/:id', (req, res) => {
     res.status(200).send('User deleted successfully');
   });
 });
+
+// Health Check Route
+app.use('/', healthCheckRouter);
 
 // Start server
 app.listen(port, () => {
