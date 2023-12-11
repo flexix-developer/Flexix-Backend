@@ -1,0 +1,60 @@
+services:
+  db:
+    image: mysql:8.2.0
+    command: '--default-authentication-plugin=mysql_native_password'
+    restart: always
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3306:3306
+    networks:
+      - private
+    environment:
+      - MYSQL_DATABASE=flexixdb
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - public
+      - private
+    depends_on:
+      - db
+
+  web:
+    build:
+      context: app
+      target: builder
+    environment:
+      - DATABASE_DB=flexixdb
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=/run/secrets/db-password
+      - DATABASE_HOST=db
+    ports:
+      - '8000:8000'
+    secrets:
+      - db-password
+    networks:
+      - public
+      - private
+    depends_on:
+      - db
+
+networks:
+  public:
+  private:
+
+volumes:
+  db-data:
+
+secrets:
+  db-password:
+    file: ./db/password.txt
