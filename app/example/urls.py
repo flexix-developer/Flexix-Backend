@@ -16,11 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import url
-from UserApp import views
+from UserApp  import views 
+
+
 
 urlpatterns = [
-    url(r'^register$',views.studentApi),
-    url(r'^register$',views.studentApi),
-    url(r'^user/([0-9]+)$',views.studentApi),
+    url(r'^register$',views.UserApi),
+    url(r'^user/([0-9]+)$',views.UserApi),
+    url(r'^forgot$',views.ForgotApi),
+    url(r'^checkotp$',views.VerifyOTPApi),
+    url(r'^repass$',views.RePassApi),
     url(r'^admin/', admin.site.urls),
 ]
