@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'UserApp.apps.UserappConfig',
 ]
 
@@ -80,6 +81,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'example.wsgi.application'
 
@@ -144,3 +147,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_HEADERS=True
+
