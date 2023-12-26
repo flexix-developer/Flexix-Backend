@@ -18,6 +18,6 @@ func InitDB(){
   }
 
   // Migrate the schema
-  Db.AutoMigrate(&User{})
+  Db.AutoMigrate(&User{},&Workspace{},&Project{})
   }
 

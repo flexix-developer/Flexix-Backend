@@ -29,13 +29,19 @@ func main() {
 
 
   r := gin.Default()
-  r.Use(cors.Default())
+  config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"} // ระบุโดเมนของเว็บเบราว์เซอร์
+	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
+	config.AllowHeaders = []string{"Origin", "Content-Type", "Content-Length", "Authorization"}
+//   r.Use(cors.Default())
+r.Use(cors.New(config))
   r.POST("/register", AuthController.Register)
   r.POST("/login", AuthController.Login)
   r.POST("/forgot", OtpController.ForgotAPI)
   r.POST("/check", OtpController.CheckOTPAPI)
   r.PUT("/reset", OtpController.ResetPassAPI)
   authorized := r.Group("/users", middleware.JWTAuthen())
-  authorized.GET("/readall", UserController.ReadAll)
+//   authorized.GET("/readall", UserController.ReadAll)
+authorized.GET("/readall/:id", UserController.ReadAll)
   r.Run("localhost:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

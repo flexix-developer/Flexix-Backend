@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 type ForgotBody struct{
 	Email string `json:"email" validate:"require"`
@@ -83,11 +84,12 @@ func ResetPassAPI(c *gin.Context) {
 	// Check if the email exists in the database
 	orm.Db.Where("email = ?", json.Email).First(&user)
 	fmt.Println(user.Email)
+		endcryptedPassword, _ := bcrypt.GenerateFromPassword([]byte(json.Password), 10)
 
-	userpass := orm.User{
-    Pass: json.Password, // กำหนดค่า OTP ที่คุณต้องการ
+		userpass := orm.User{
+    	Pass: string(endcryptedPassword), // กำหนดค่า OTP ที่คุณต้องการ
 		}
-		orm.Db.Model(&user).Where("email = ?", json.Email).Update("otp", userpass.Pass)
+		orm.Db.Model(&user).Where("email = ?", json.Email).Update("pass", userpass.Pass)
 		
 		responseData := gin.H{
 			"message":         "Change Password Complete",

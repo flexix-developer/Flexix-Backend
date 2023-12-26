@@ -83,12 +83,12 @@ func Login (c *gin.Context){
 		hmacSampleSecret = []byte(os.Getenv("JWT_SECRET_KEY"))
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"userId" : userExist.ID,
-			"exp": time.Now().Add(time.Minute * 5).Unix(),
+			"exp": time.Now().Add(time.Minute * 60).Unix(),
 		})
 		tokenString, err := token.SignedString(hmacSampleSecret)
 		fmt.Println(tokenString, err)
 
-	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Login Success", "token": tokenString })
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Login Success", "token": tokenString ,"ID" : userExist.ID})
 	} else{
 		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Login Failed"})
 	}
