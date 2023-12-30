@@ -3,6 +3,7 @@ package main
 import (
 	AuthController "flexix_backend/app_golang/controller/auth"
 	OtpController "flexix_backend/app_golang/controller/otp"
+	CreateProjectCotroller "flexix_backend/app_golang/controller/project"
 	UserController "flexix_backend/app_golang/controller/user"
 	"flexix_backend/app_golang/middleware"
 
@@ -41,6 +42,7 @@ r.Use(cors.New(config))
   r.POST("/check", OtpController.CheckOTPAPI)
   r.PUT("/reset", OtpController.ResetPassAPI)
   authorized := r.Group("/users", middleware.JWTAuthen())
+  authorized.POST("/create",CreateProjectCotroller.CreateProject)
 //   authorized.GET("/readall", UserController.ReadAll)
 authorized.GET("/readall/:id", UserController.ReadAll)
   r.Run("localhost:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

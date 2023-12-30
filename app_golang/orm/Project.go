@@ -22,8 +22,8 @@ import (
 
 type Project struct {
 	gorm.Model
-	WorkspaceID  uint
-	Workspace    Workspace `gorm:"foreignKey:WorkspaceID"`
+    UserID uint // ใช้เก็บค่าของ Primary Key ของตาราง User
+    User   User `gorm:"foreignKey:UserID"`
   ScreenIMG    string    `gorm:"column:screen_img"`
 	ProjectName  string    `gorm:"column:project_name"`
 	ProjectPath  string    `gorm:"column:project_path"`
