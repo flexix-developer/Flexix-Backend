@@ -46,8 +46,13 @@ func Register (c *gin.Context){
 		Fname: json.Fname, Lname: json.Lname}
 	orm.Db.Create(&user)
 	if user.ID > 0 {
+		folderPath := fmt.Sprintf("user_project_path/%d/", user.ID)
+		err := os.MkdirAll(folderPath, os.ModePerm)
+		fmt.Println("Folder created successfully",err)
+		
 		c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Create Success", "UserID": user.ID})
 	} else {
+		fmt.Println("Error creating folder:", err)
 		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "User Create Failled"})
 	}
 }
