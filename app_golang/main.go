@@ -43,7 +43,8 @@ r.Use(cors.New(config))
   r.PUT("/reset", OtpController.ResetPassAPI)
   authorized := r.Group("/users", middleware.JWTAuthen())
   authorized.POST("/create",CreateProjectCotroller.CreateProject)
-//   authorized.GET("/readall", UserController.ReadAll)
-authorized.GET("/readall/:id", UserController.ReadAll)
+  authorized.GET("/readall/:id", UserController.ReadAll)
+  authorized.GET("/readproject/:id",CreateProjectCotroller.ShowProjectByID)
+
   r.Run("localhost:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
