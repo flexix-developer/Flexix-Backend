@@ -16,6 +16,7 @@ type projectbody struct {
 	PName string `json:"name" validate:"require"`
 }
 
+
 func CreateProject(c *gin.Context) {
 	imagePath := "defalt.png"
 	var json projectbody
@@ -58,16 +59,25 @@ if projectQuery.Error == nil && projectQuery.RowsAffected > 0 {
 		ProjectName: json.PName,
 		UserID:      uint(userID),
 		ScreenIMG:   imageData,
+		
 	}
 
 	if err := orm.Db.Create(&project).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Create Project Failed", "error": err.Error()})
 		return
 	}
+	project.ProjectPath = fmt.Sprintf("user_project_path/%s/%d/", json.ID, project.ID)
+
+	// Update the project with the ProjectPath
+	if err := orm.Db.Save(&project).Error; err != nil {
+		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Update Project Failed", "error": err.Error()})
+		return
+	}
 
 	// Create the folder
-	folderPath := fmt.Sprintf("user_project_path/%s/%s/", json.ID, json.PName)
-	err = os.MkdirAll(folderPath, os.ModePerm)
+	// folderPath := fmt.Sprintf("user_project_path/%s/%s/", json.ID, json.PName)
+	// err = os.MkdirAll(folderPath, os.ModePerm)
+	err = os.MkdirAll(project.ProjectPath, os.ModePerm)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Create Project Failed", "error": err.Error()})
 		return
@@ -104,6 +114,7 @@ func readImage(filePath string) (string, error) {
 }
 
 
+
 func ShowProjectByID(c *gin.Context) {
     userID := c.Param("id")
 
@@ -121,4 +132,65 @@ func ShowProjectByID(c *gin.Context) {
 
 
     c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Read Success", "UserID": userID, "Projects": projects})
+}
+
+
+
+func DelProjectById(c *gin.Context) {
+    ProjectID := c.Param("id")
+
+    if ProjectID == "" {
+        c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid Project ID"})
+        return
+    }
+
+    var project []orm.Project
+	if err := orm.Db.Where("id = ?", ProjectID).First(&project).Error; err != nil {
+        // หากไม่พบโครงการ
+        c.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "Project not found"})
+        return
+    }
+	if err := orm.Db.Delete(&project).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to delete project", "error": err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Project deleted successfully"})
+    
+}
+
+
+type editprojectnamebyidbody struct {
+	NewPName string `json:"newpname" validate:"required"`
+}
+
+func EditProjectNameById(c *gin.Context) {
+	ProjectID := c.Param("id")
+
+	if ProjectID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid Project ID"})
+		return
+	}
+
+	var jsonBody editprojectnamebyidbody
+	if err := c.ShouldBindJSON(&jsonBody); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid JSON format"})
+		return
+	}
+
+	var project orm.Project
+	if err := orm.Db.Where("id = ?", ProjectID).First(&project).Error; err != nil {
+		// If the project is not found
+		c.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "Project not found"})
+		return
+	}
+
+	// Update the project's name
+	project.ProjectName = jsonBody.NewPName
+	if err := orm.Db.Save(&project).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to update project", "error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Project updated successfully"})
 }

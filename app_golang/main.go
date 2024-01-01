@@ -45,6 +45,8 @@ r.Use(cors.New(config))
   authorized.POST("/create",CreateProjectCotroller.CreateProject)
   authorized.GET("/readall/:id", UserController.ReadAll)
   authorized.GET("/readproject/:id",CreateProjectCotroller.ShowProjectByID)
+  authorized.DELETE("/delproject/:id",CreateProjectCotroller.DelProjectById)
+  authorized.PUT("/editname/:id",CreateProjectCotroller.EditProjectNameById)
 
   r.Run("localhost:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
