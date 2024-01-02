@@ -17,6 +17,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import url
 from UserApp  import views 
+from UserApp.views import LoginAPIView
+from django.urls import path
 
 
 
@@ -26,5 +28,6 @@ urlpatterns = [
     url(r'^forgot$',views.ForgotApi),
     url(r'^checkotp$',views.VerifyOTPApi),
     url(r'^repass$',views.RePassApi),
+    path('api/login/', LoginAPIView.as_view(), name='api-login'),
     url(r'^admin/', admin.site.urls),
 ]

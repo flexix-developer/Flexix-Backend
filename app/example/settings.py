@@ -82,6 +82,12 @@ TEMPLATES = [
     },
 ]
 
+# AUTH_USER_MODEL = 'UserApp.UserApp_user'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Use this if you're using the default User model
+]
+
+AUTH_USER_MODEL = 'UserApp.alet'
 
 
 WSGI_APPLICATION = 'example.wsgi.application'

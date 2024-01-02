@@ -8,6 +8,7 @@ from UserApp.serializers import StudentSerializer
 from UserApp.models import User
 from UserApp.sendotp import send_otp_email
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import authenticate, login, logout
 
 
 @csrf_exempt
@@ -18,11 +19,13 @@ def UserApi(request,id=0):
         return JsonResponse(student_serializer.data,safe=False)
     elif request.method=='POST':
         student_data=JSONParser().parse(request)
-        print("student_data",student_data)
+        # print("student_data",student_data)
         student_serializer=StudentSerializer(data=student_data)
         print("student_serializer",student_serializer)
         if student_serializer.is_valid():
-            student_serializer.save()
+            user = student_serializer.save()
+            # print(user)
+            # login(request, user)
             return JsonResponse("Added Successfully",safe=False)
         return JsonResponse({"error": "Failed to Add"}, status=400)
     elif request.method=='PUT':
@@ -59,7 +62,7 @@ def ForgotApi(request):
             # Email exists, you can perform further actions here
             # ใช้ฟังก์ชันเพื่อส่ง OTP ไปยังอีเมล
             otp_num = send_otp_email(reqEmail)
-            print("otp_num",otp_num)
+            # print("otp_num",otp_num)
 
             # เพิ่มข้อมูลที่ต้องการส่งกลับใน JSON response
             response_data = {
@@ -111,4 +114,34 @@ def RePassApi(request):
             student_serializer.save()
             return JsonResponse("Updated Successfully",safe=False)
         return JsonResponse("Failed to Update")
-    
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.contrib.auth import authenticate, login
+from .serializers import LoginSerializer
+
+class LoginAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = LoginSerializer(data=request.data)
+        serializer = LoginSerializer(data=request.data)
+        print("Is serializer valid?", serializer.is_valid())
+        print("Serializer errors:", serializer.errors)
+
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+            print(email,password)
+            
+
+            user = authenticate(request, username=email, password=password)
+            print(user)
+
+            if user:
+                login(request, user)
+                return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
