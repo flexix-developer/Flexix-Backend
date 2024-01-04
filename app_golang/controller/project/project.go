@@ -161,11 +161,15 @@ func DelProjectById(c *gin.Context) {
 
 
 type editprojectnamebyidbody struct {
+
+	UserId string `json:"id" validate:"required"`
 	NewPName string `json:"newpname" validate:"required"`
+	
 }
 
 func EditProjectNameById(c *gin.Context) {
 	ProjectID := c.Param("id")
+
 
 	if ProjectID == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid Project ID"})
@@ -177,6 +181,8 @@ func EditProjectNameById(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid JSON format"})
 		return
 	}
+	// fmt.Println(jsonBody.NewPName)
+	
 
 	var project orm.Project
 	if err := orm.Db.Where("id = ?", ProjectID).First(&project).Error; err != nil {
@@ -184,6 +190,13 @@ func EditProjectNameById(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "Project not found"})
 		return
 	}
+	var existingProject orm.Project
+	if err := orm.Db.Where("user_id = ? AND project_name = ?", jsonBody.UserId, jsonBody.NewPName).First(&existingProject).Error; err == nil {
+		// If the project with the same name already exists for the user
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Project name already exists for the user"})
+		return
+	}
+
 
 	// Update the project's name
 	project.ProjectName = jsonBody.NewPName
