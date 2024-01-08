@@ -6,17 +6,15 @@ You can open this sample in the Dev Environments feature of Docker Desktop versi
 
 [Open in Docker Dev Environments <img src="../open_in_new.svg" alt="Open in Docker Dev Environments" align="top"/>](https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master/django)
 
-### venv
+## Follow Steps On This Video
 
-python -m venv myenv
+https://www.youtube.com/watch?v=OeJyjBoA-UA
 
-### Activate venv
+## If Wan't To Run
 
-myenv\Scripts\activate
-
-### Install Envaronment
-
-pip install django
+cd app_golang
+go get .
+go run .
 
 ### If Can't Activate venv
 
