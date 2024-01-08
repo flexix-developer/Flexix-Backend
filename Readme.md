@@ -13,7 +13,9 @@ https://www.youtube.com/watch?v=OeJyjBoA-UA
 ## If Wan't To Run
 
 cd app_golang
+
 go get .
+
 go run .
 
 ### If Can't Activate venv
