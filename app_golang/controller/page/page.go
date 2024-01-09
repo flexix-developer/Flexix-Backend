@@ -10,9 +10,11 @@ import (
 )
 
 type createpagebyidbody struct {
-	UserID    string `json:"userId" validate:"require"`
-	ProjectID string `json:"projectId" validate:"require"`
-	PageName  string `json:"pageName" validate:"require"`
+	UserID    string `json:"userId" validate:"required"`
+	ProjectID string `json:"projectId" validate:"required"`
+	PageName  string `json:"pageName" validate:"required"`
+	Width     string `json:"width" validate:"required"`
+	Height    string `json:"height" validate:"required"`
 }
 
 func CreatePageByID(c *gin.Context) {
@@ -56,6 +58,14 @@ func CreatePageByID(c *gin.Context) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>` + json.PageName + `</title>
+    <style>
+    body {
+      width: `+json.Width+`; /* กำหนดความกว้างของ body เท่ากับหน้าจอ */
+      height: `+json.Height+`; /* กำหนดความสูงของ body เท่ากับความสูงของหน้าจอ */
+      margin: 0; /* ลบ margin ที่มีอยู่ตามทั่วไป */
+      padding: 0; /* ลบ padding ที่มีอยู่ตามทั่วไป */
+    }
+  </style>
 </head>
 <body>
 </body>
