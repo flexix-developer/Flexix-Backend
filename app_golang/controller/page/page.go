@@ -1,6 +1,7 @@
 package page
 
 import (
+	"flexix_backend/app_golang/orm"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -66,8 +67,10 @@ func CreatePageByID(c *gin.Context) {
       padding: 0; /* ลบ padding ที่มีอยู่ตามทั่วไป */
     }
   </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+<div id="main"></div>
 </body>
 </html>`
 
@@ -78,4 +81,38 @@ func CreatePageByID(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Page created successfully"})
+}
+
+
+func ShowPageByProjectID(c *gin.Context) {
+	// var jsonBody getpageinprojectbody
+
+	userID := c.Param("id")
+	projectID := c.Param("projectid")
+	dir := fmt.Sprintf("user_project_path/%s/%s/", userID, projectID)
+
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		fmt.Println("Error reading directory:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Internal Server Error"})
+		return
+	}
+
+	var user orm.Project
+    if err := orm.Db.First(&user,projectID).Error; err != nil {
+        // หากไม่พบผู้ใช้
+        c.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "User not found"})
+        return
+    }
+	fmt.Println(user.ProjectName)
+	
+	var fileNames []string
+
+	for _, file := range files {
+		fileNames = append(fileNames, file.Name())
+	}
+
+	fmt.Println(fileNames)
+
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Read Success", "UserID": userID, "Projects": projectID ,"ProjectName" : user.ProjectName, "Pages" : fileNames})
 }

@@ -51,6 +51,7 @@ r.Use(cors.New(config))
   authorized.PUT("/editname/:id",ProjectCotroller.EditProjectNameById)
 
   authorized.POST("/page",PageCotroller.CreatePageByID)
+  authorized.GET("/getpages/:id/:projectid",PageCotroller.ShowPageByProjectID)
 
   r.Run("localhost:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
