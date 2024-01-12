@@ -116,3 +116,45 @@ func ShowPageByProjectID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Read Success", "UserID": userID, "Projects": projectID ,"ProjectName" : user.ProjectName, "Pages" : fileNames})
 }
+
+// type deletepagebody struct {
+// 	ProjectID    string `json:"proid" validate:"required"`
+// 	PageName	 string `json:"pagename" validate:"required"`
+// }
+
+// func DeletePage(c *gin.Context){
+// 	var json deletepagebody
+// 	if err := c.ShouldBindJSON(&json); err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+// 		return
+// 	}
+
+// 	fmt.Println(json)
+
+// }
+
+type deletepagebody struct {
+	ID string `json:"id" validate:"required"`
+	ProjectID string `json:"proid" validate:"required"`
+	PageName  string `json:"pagename" validate:"required"`
+}
+
+func DeletePage(c *gin.Context) {
+	var json deletepagebody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Assuming project.ProjectPath is the path to the directory you want to delete
+	ProjectPath := fmt.Sprintf("user_project_path/%s/%s/%s", json.ID, json.ProjectID, json.PageName)
+
+	// Delete the directory and its contents
+	err := os.RemoveAll(ProjectPath)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Delete Page Failed", "error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page Deleted Successfully"})
+}
