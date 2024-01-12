@@ -53,6 +53,7 @@ r.Use(cors.New(config))
   authorized.POST("/page",PageCotroller.CreatePageByID)
   authorized.GET("/getpages/:id/:projectid",PageCotroller.ShowPageByProjectID)
   authorized.POST("/deletepage",PageCotroller.DeletePage)
+  authorized.POST("/editpage",PageCotroller.EditPage)
 
 
   r.Run("localhost:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

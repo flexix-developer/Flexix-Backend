@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path"
 
 	"github.com/gin-gonic/gin"
 )
@@ -117,21 +118,6 @@ func ShowPageByProjectID(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Read Success", "UserID": userID, "Projects": projectID ,"ProjectName" : user.ProjectName, "Pages" : fileNames})
 }
 
-// type deletepagebody struct {
-// 	ProjectID    string `json:"proid" validate:"required"`
-// 	PageName	 string `json:"pagename" validate:"required"`
-// }
-
-// func DeletePage(c *gin.Context){
-// 	var json deletepagebody
-// 	if err := c.ShouldBindJSON(&json); err != nil {
-// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-// 		return
-// 	}
-
-// 	fmt.Println(json)
-
-// }
 
 type deletepagebody struct {
 	ID string `json:"id" validate:"required"`
@@ -157,4 +143,73 @@ func DeletePage(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page Deleted Successfully"})
+}
+
+
+// type editpagebody struct {
+// 	ID          string `json:"id" validate:"required"`
+// 	ProjectID   string `json:"proid" validate:"required"`
+// 	PageName    string `json:"pagename" validate:"required"`
+// 	NewPageName string `json:"newpagename" validate:"required"`
+// }
+
+// func EditPage(c *gin.Context) {
+// 	var json editpagebody
+// 	if err := c.ShouldBindJSON(&json); err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+// 		return
+// 	}
+
+// 	// Construct the old and new project paths using path.Join
+// 	OldProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.PageName)
+// 	NewProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.NewPageName)
+
+// 	// Attempt to rename the directory
+// 	err := os.Rename(OldProjectPath, NewProjectPath)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Rename Page Failed", "error": err.Error()})
+// 		return
+// 	}
+
+// 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page Renamed Successfully"})
+// }
+
+type editpagebody struct {
+	ID          string `json:"id" validate:"required"`
+	ProjectID   string `json:"proid" validate:"required"`
+	PageName    string `json:"pagename" validate:"required"`
+	NewPageName string `json:"newpagename" validate:"required"`
+}
+
+func isPageNameExists(id, projectID, pageName string) bool {
+	projectPath := path.Join("user_project_path", id, projectID, pageName)
+	_, err := os.Stat(projectPath)
+	return err == nil
+}
+
+func EditPage(c *gin.Context) {
+	var json editpagebody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+		return
+	}
+
+	// Check if the new page name already exists
+	if isPageNameExists(json.ID, json.ProjectID, json.NewPageName) {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "New page name already exists"})
+		return
+	}
+
+	// Construct the old and new project paths using path.Join
+	oldProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.PageName)
+	newProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.NewPageName)
+
+	// Attempt to rename the directory
+	err := os.Rename(oldProjectPath, newProjectPath)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Rename Page Failed", "error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page Renamed Successfully"})
 }
