@@ -146,34 +146,6 @@ func DeletePage(c *gin.Context) {
 }
 
 
-// type editpagebody struct {
-// 	ID          string `json:"id" validate:"required"`
-// 	ProjectID   string `json:"proid" validate:"required"`
-// 	PageName    string `json:"pagename" validate:"required"`
-// 	NewPageName string `json:"newpagename" validate:"required"`
-// }
-
-// func EditPage(c *gin.Context) {
-// 	var json editpagebody
-// 	if err := c.ShouldBindJSON(&json); err != nil {
-// 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
-// 		return
-// 	}
-
-// 	// Construct the old and new project paths using path.Join
-// 	OldProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.PageName)
-// 	NewProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.NewPageName)
-
-// 	// Attempt to rename the directory
-// 	err := os.Rename(OldProjectPath, NewProjectPath)
-// 	if err != nil {
-// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Rename Page Failed", "error": err.Error()})
-// 		return
-// 	}
-
-// 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page Renamed Successfully"})
-// }
-
 type editpagebody struct {
 	ID          string `json:"id" validate:"required"`
 	ProjectID   string `json:"proid" validate:"required"`
@@ -212,4 +184,32 @@ func EditPage(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page Renamed Successfully"})
+}
+
+
+type getpagebody struct {
+	ID          string `json:"id" validate:"required"`
+	ProjectID   string `json:"proid" validate:"required"`
+	PageName    string `json:"pagename" validate:"required"`
+}
+
+
+func GetPage(c *gin.Context) {
+	var json editpagebody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+		return
+	}
+	ProjectPath := fmt.Sprintf("user_project_path/%s/%s/%s", json.ID, json.ProjectID, json.PageName)
+	// Read the content of the file
+	fileContent, readErr := ioutil.ReadFile(ProjectPath)
+	if readErr != nil {
+		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Read File Failed", "error": readErr.Error()})
+		return
+	}
+
+	contentString := string(fileContent)
+
+	// Now 'contentString' contains the content of the file
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Read File Successfully", "content": contentString})
 }
