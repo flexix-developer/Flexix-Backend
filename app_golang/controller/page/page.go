@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 )
@@ -212,4 +213,38 @@ func GetPage(c *gin.Context) {
 
 	// Now 'contentString' contains the content of the file
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Read File Successfully", "content": contentString})
+}
+
+type savepagebody struct {
+	ID        string `json:"id" validate:"required"`
+	ProjectID string `json:"proid" validate:"required"`
+	PageName  string `json:"pagename" validate:"required"`
+	Content   string `json:"content" validate:"required"`
+}
+
+func SavePage(c *gin.Context) {
+	var json savepagebody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+		return
+	}
+
+	// ใช้ fmt.Sprintf เพื่อสร้างเส้นทางไฟล์โดยใส่ค่า ID, ProjectID, และ PageName ลงในรูปแบบ
+	filePath := fmt.Sprintf("user_project_path/%s/%s/%s", json.ID, json.ProjectID, json.PageName)
+
+	// ตรวจสอบและสร้างโฟลเดอร์หากยังไม่มี
+	if err := os.MkdirAll(filepath.Dir(filePath), 0755); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Could not create directory", "error": err.Error()})
+		return
+	}
+
+	// สร้างหรือเขียนข้อมูลลงในไฟล์
+	err := os.WriteFile(filePath, []byte(json.Content), 0644)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Could not save the page", "error": err.Error()})
+		return
+	}
+
+	// ส่ง response กลับไปเมื่อบันทึกสำเร็จ
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page saved successfully"})
 }
