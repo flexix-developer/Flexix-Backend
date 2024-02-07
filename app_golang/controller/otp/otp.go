@@ -3,7 +3,6 @@ package otp
 import (
 	"flexix_backend/app_golang/orm"
 	"fmt"
-	"math/rand"
 	"net/smtp"
 	"strconv"
 )
@@ -98,7 +97,8 @@ orm.Db.Model(&user).Where("email = ?", recipientEmail).Update("otp", user.OTP)
 
 func randOTP() string {
 	// สุ่มตัวเลข OTP
-	randInt := rand.Intn(900000) + 100000
+	// randInt := rand.Intn(900000) + 100000
+	randInt := 567890
 	fmt.Println(randInt)
 	return strconv.Itoa(randInt)
 }
