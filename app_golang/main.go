@@ -55,7 +55,9 @@ r.Use(cors.New(config))
   authorized.POST("/deletepage",PageCotroller.DeletePage)
   authorized.POST("/editpage",PageCotroller.EditPage)
   authorized.POST("/getpage",PageCotroller.GetPage)
-    authorized.POST("/savepage",PageCotroller.SavePage)
+  authorized.POST("/savepage",PageCotroller.SavePage)
+  authorized.POST("/editscript",PageCotroller.EditScriptByID)
+  
 
 
 

@@ -20,51 +20,52 @@ type createpagebyidbody struct {
 	Height    string `json:"height" validate:"required"`
 }
 
+
 func CreatePageByID(c *gin.Context) {
-	var json createpagebyidbody
-	if err := c.ShouldBindJSON(&json); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	fmt.Println(json.UserID, json.ProjectID, json.PageName)
+    var json createpagebyidbody
+    if err := c.ShouldBindJSON(&json); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    fmt.Println(json.UserID, json.ProjectID, json.PageName)
 
-	// Check if the user's directory exists
-	userDirectory := fmt.Sprintf("user_project_path/%s/", json.UserID)
-	if _, err := os.Stat(userDirectory); os.IsNotExist(err) {
-		// User directory does not exist, return an error
-		c.JSON(http.StatusBadRequest, gin.H{"error": "User directory not found"})
-		return
-	}
+    // Check if the user's directory exists
+    userDirectory := fmt.Sprintf("user_project_path/%s/", json.UserID)
+    if _, err := os.Stat(userDirectory); os.IsNotExist(err) {
+        // User directory does not exist, return an error
+        c.JSON(http.StatusBadRequest, gin.H{"error": "User directory not found"})
+        return
+    }
 
-	// Check if the project directory exists within the user's directory
-	projectDirectory := fmt.Sprintf("%s%s/", userDirectory, json.ProjectID)
-	if _, err := os.Stat(projectDirectory); os.IsNotExist(err) {
-		// Project directory does not exist, return an error
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Project not found for the specified user"})
-		return
-	}
+    // Check if the project directory exists within the user's directory
+    projectDirectory := fmt.Sprintf("%s%s/", userDirectory, json.ProjectID)
+    if _, err := os.Stat(projectDirectory); os.IsNotExist(err) {
+        // Project directory does not exist, return an error
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Project not found for the specified user"})
+        return
+    }
 
-	// Create the HTML file with the specified page name
-	htmlFilePath := projectDirectory + json.PageName + ".html"
+    // Create the HTML file with the specified page name
+    htmlFilePath := projectDirectory + json.PageName + ".html"
 
-	// Check if the file already exists
-	if _, err := os.Stat(htmlFilePath); err == nil {
-		// File already exists, return an error
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Page with this name already exists"})
-		return
-	}
+    // Check if the HTML file already exists
+    if _, err := os.Stat(htmlFilePath); err == nil {
+        // HTML File already exists, return an error
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Page with this name already exists"})
+        return
+    }
 
-	// Create the HTML content
-	htmlContent := `<!DOCTYPE html>
+    // Create the HTML content
+    htmlContent := `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>` + json.PageName + `</title>
-    <style>
+  <style>
     body {
-      width: `+json.Width+`; /* กำหนดความกว้างของ body เท่ากับหน้าจอ */
-      height: `+json.Height+`; /* กำหนดความสูงของ body เท่ากับความสูงของหน้าจอ */
+      width: ` + json.Width + `; /* กำหนดความกว้างของ body เท่ากับหน้าจอ */
+      height: ` + json.Height + `; /* กำหนดความสูงของ body เท่ากับความสูงของหน้าจอ */
       margin: 0; /* ลบ margin ที่มีอยู่ตามทั่วไป */
       padding: 0; /* ลบ padding ที่มีอยู่ตามทั่วไป */
     }
@@ -73,51 +74,101 @@ func CreatePageByID(c *gin.Context) {
 </head>
 <body>
 <div id="main"></div>
+<script src="` + json.PageName + `.js"></script>
 </body>
 </html>`
 
-	// Create the HTML file
-	if err := ioutil.WriteFile(htmlFilePath, []byte(htmlContent), os.ModePerm); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"message": "Page created successfully"})
-}
-
-
-func ShowPageByProjectID(c *gin.Context) {
-	// var jsonBody getpageinprojectbody
-
-	userID := c.Param("id")
-	projectID := c.Param("projectid")
-	dir := fmt.Sprintf("user_project_path/%s/%s/", userID, projectID)
-
-	files, err := ioutil.ReadDir(dir)
-	if err != nil {
-		fmt.Println("Error reading directory:", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Internal Server Error"})
-		return
-	}
-
-	var user orm.Project
-    if err := orm.Db.First(&user,projectID).Error; err != nil {
-        // หากไม่พบผู้ใช้
-        c.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "User not found"})
+    // Create the HTML file
+    if err := ioutil.WriteFile(htmlFilePath, []byte(htmlContent), os.ModePerm); err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
         return
     }
-	fmt.Println(user.ProjectName)
-	
-	var fileNames []string
 
-	for _, file := range files {
-		fileNames = append(fileNames, file.Name())
-	}
+    // Also create a .js file with the specified page name
+    jsFilePath := projectDirectory + json.PageName + ".js"
+    jsContent := `` // Basic JS content, modify as needed
 
-	fmt.Println(fileNames)
+    // Check if the JS file already exists
+    if _, err := os.Stat(jsFilePath); err == nil {
+        // JS File already exists, you might want to handle this differently
+    }
 
-	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Read Success", "UserID": userID, "Projects": projectID ,"ProjectName" : user.ProjectName, "Pages" : fileNames})
+    // Create the JS file
+    if err := ioutil.WriteFile(jsFilePath, []byte(jsContent), os.ModePerm); err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusOK, gin.H{"message": "Page and associated JS file created successfully"})
 }
+
+
+// func ShowPageByProjectID(c *gin.Context) {
+// 	// var jsonBody getpageinprojectbody
+
+// 	userID := c.Param("id")
+// 	projectID := c.Param("projectid")
+// 	dir := fmt.Sprintf("user_project_path/%s/%s/", userID, projectID)
+
+// 	files, err := ioutil.ReadDir(dir)
+// 	if err != nil {
+// 		fmt.Println("Error reading directory:", err)
+// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Internal Server Error"})
+// 		return
+// 	}
+
+// 	var user orm.Project
+//     if err := orm.Db.First(&user,projectID).Error; err != nil {
+//         // หากไม่พบผู้ใช้
+//         c.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "User not found"})
+//         return
+//     }
+// 	fmt.Println(user.ProjectName)
+	
+// 	var fileNames []string
+
+// 	for _, file := range files {
+// 		fileNames = append(fileNames, file.Name())
+// 	}
+
+// 	fmt.Println(fileNames)
+
+// 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Read Success", "UserID": userID, "Projects": projectID ,"ProjectName" : user.ProjectName, "Pages" : fileNames})
+// }
+
+func ShowPageByProjectID(c *gin.Context) {
+    userID := c.Param("id")
+    projectID := c.Param("projectid")
+    dir := fmt.Sprintf("user_project_path/%s/%s/", userID, projectID)
+
+    files, err := ioutil.ReadDir(dir)
+    if err != nil {
+        fmt.Println("Error reading directory:", err)
+        c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Internal Server Error"})
+        return
+    }
+
+    var user orm.Project
+    if err := orm.Db.First(&user, projectID).Error; err != nil {
+        // If user not found
+        c.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "Project not found"})
+        return
+    }
+    fmt.Println(user.ProjectName)
+    
+    var fileNames []string
+
+    for _, file := range files {
+        if filepath.Ext(file.Name()) == ".html" {
+            fileNames = append(fileNames, file.Name())
+        }
+    }
+
+    fmt.Println(fileNames)
+
+    c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Project Read Success", "UserID": userID, "ProjectID": projectID, "ProjectName": user.ProjectName, "Pages": fileNames})
+}
+
 
 
 type deletepagebody struct {
@@ -247,4 +298,21 @@ func SavePage(c *gin.Context) {
 
 	// ส่ง response กลับไปเมื่อบันทึกสำเร็จ
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page saved successfully"})
+}
+
+
+type editscriptbyidbody struct {
+	UserID    string `json:"userId" validate:"required"`
+	ProjectID string `json:"projectId" validate:"required"`
+	PageName  string `json:"pageName" validate:"required"`
+	Content string `json:"content" validate:"required"`
+}
+
+func EditScriptByID(c *gin.Context) {
+	var json editscriptbyidbody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	fmt.Println(json.UserID, json.ProjectID, json.PageName,json.Content)
 }
