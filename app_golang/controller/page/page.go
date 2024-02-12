@@ -1,6 +1,7 @@
 package page
 
 import (
+	"bytes"
 	"flexix_backend/app_golang/orm"
 	"fmt"
 	"io/ioutil"
@@ -217,27 +218,75 @@ func EditPage(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
 		return
 	}
+	fmt.Println(json.NewPageName)
 
 	// Check if the new page name already exists
-	if isPageNameExists(json.ID, json.ProjectID, json.NewPageName) {
+	if isPageNameExists(json.ID, json.ProjectID, json.NewPageName+".html") {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "New page name already exists"})
 		return
 	}
 
 	// Construct the old and new project paths using path.Join
-	oldProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.PageName)
-	newProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.NewPageName)
+	oldProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.PageName+".html")
+	newProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.NewPageName+".html")
+		// Construct the old and new project paths using path.Join
+	jsoldProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.PageName+".js")
+	jsnewProjectPath := path.Join("user_project_path", json.ID, json.ProjectID, json.NewPageName+".js")
 
 	// Attempt to rename the directory
 	err := os.Rename(oldProjectPath, newProjectPath)
-	if err != nil {
+	errjs := os.Rename(jsoldProjectPath, jsnewProjectPath)
+	if err != nil || errjs != nil{
 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Rename Page Failed", "error": err.Error()})
 		return
 	}
 
+	    // อัปเดตไฟล์ .html เพื่อระบุชื่อไฟล์ .js ใหม่
+    updateHTMLFile(newProjectPath, json.NewPageName+".js",json.PageName+".js")
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page Renamed Successfully"})
 }
 
+// func updateHTMLFile(filePath, newScriptName string) {
+//     // อ่านเนื้อหาจากไฟล์ .html
+//     htmlContent, err := ioutil.ReadFile(filePath)
+//     if err != nil {
+//         fmt.Println("Error reading HTML file:", err)
+//         return
+//     }
+
+//     // แทนที่ชื่อไฟล์ .js เดิมด้วยชื่อไฟล์ .js ใหม่
+//     updatedHTMLContent := bytes.ReplaceAll(htmlContent, []byte(".js"), []byte(newScriptName))
+
+//     // เขียนเนื้อหาใหม่กลับไปยังไฟล์ .html
+//     err = ioutil.WriteFile(filePath, updatedHTMLContent, 0644)
+//     if err != nil {
+//         fmt.Println("Error updating HTML file:", err)
+//         return
+//     }
+
+//     fmt.Println("HTML file updated successfully")
+// }
+
+func updateHTMLFile(filePath, newScriptName string , PageName  string) {
+    // Read the content from the .html file
+    htmlContent, err := ioutil.ReadFile(filePath)
+    if err != nil {
+        fmt.Println("Error reading HTML file:", err)
+        return
+    }
+
+    // Replace the old .js file name with the new .js file name
+    updatedHTMLContent := bytes.Replace(htmlContent, []byte(PageName), []byte(newScriptName), 1)
+
+    // Write the updated content back to the .html file
+    err = ioutil.WriteFile(filePath, updatedHTMLContent, 0644)
+    if err != nil {
+        fmt.Println("Error updating HTML file:", err)
+        return
+    }
+
+    fmt.Println("HTML file updated successfully")
+}
 
 type getpagebody struct {
 	ID          string `json:"id" validate:"required"`
@@ -314,5 +363,23 @@ func EditScriptByID(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+		// ใช้ fmt.Sprintf เพื่อสร้างเส้นทางไฟล์โดยใส่ค่า ID, ProjectID, และ PageName ลงในรูปแบบ
+	filePath := fmt.Sprintf("user_project_path/%s/%s/%s", json.UserID , json.ProjectID, json.PageName+".js")
+
+	// ตรวจสอบและสร้างโฟลเดอร์หากยังไม่มี
+	if err := os.MkdirAll(filepath.Dir(filePath), 0755); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Could not create directory", "error": err.Error()})
+		return
+	}
+
+	// สร้างหรือเขียนข้อมูลลงในไฟล์
+	err := os.WriteFile(filePath, []byte(json.Content), 0644)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Could not save the page", "error": err.Error()})
+		return
+	}
+
+	// ส่ง response กลับไปเมื่อบันทึกสำเร็จ
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page saved successfully"})
 	fmt.Println(json.UserID, json.ProjectID, json.PageName,json.Content)
 }
