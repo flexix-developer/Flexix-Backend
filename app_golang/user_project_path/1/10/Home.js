@@ -1,5 +1,9 @@
 window.onload = function () {
-    fetch("http://127.0.0.1:5000/api")
+    fetch("http://127.0.0.1:5000/api"
+    , {
+        method: "GET", // สามารถเปลี่ยนเป็น 'POST', 'PUT', ถ้ามีความจำเป็น
+        headers: {},
+      })
       .then((response) => response.json())
       .then((data) => {
         const sourceElement = document.getElementById("Content");
@@ -18,28 +22,6 @@ window.onload = function () {
 // // Check and change src for image-2
     if (child.tagName === "IMG" && child.id.includes("image-2")) {
     child.src = item.Product_Image; // Set the new src
-  }          
-// // Check and change src for button-0
-                   if (child.id.includes("button-0")) {
-                    child.addEventListener("click", function () {
-                      window.location.href = `Detail.html?id=${item.ID}`;
-                      console.log(item.ID);
-                    });
-                  }          
-// Modify text for P_Name
-  if (child.id.includes("P_Name")) {
-    child.textContent = item.Product_Name; // Set the new text
-  }          
-// // Check and change src for button-0
-                   if (child.id.includes("button-0")) {
-                    child.addEventListener("click", function () {
-                      window.location.href = `Detail.html?id=${item.ID}`;
-                      console.log(item.ID);
-                    });
-                  }          
-// Modify text for P_Price
-  if (child.id.includes("P_Price")) {
-    child.textContent = item.Product_Price; // Set the new text
   }          
 // // Check and change src for button-0
                    if (child.id.includes("button-0")) {

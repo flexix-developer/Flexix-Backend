@@ -57,6 +57,8 @@ r.Use(cors.New(config))
   authorized.POST("/getpage",PageCotroller.GetPage)
   authorized.POST("/savepage",PageCotroller.SavePage)
   authorized.POST("/editscript",PageCotroller.EditScriptByID)
+  authorized.POST("/getscript",PageCotroller.GetScriptPageName)
+  authorized.POST("/savefunc",PageCotroller.SaveFuncScript)
   
 
 

@@ -381,5 +381,72 @@ func EditScriptByID(c *gin.Context) {
 
 	// ส่ง response กลับไปเมื่อบันทึกสำเร็จ
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page saved successfully"})
-	fmt.Println(json.UserID, json.ProjectID, json.PageName,json.Content)
+	// fmt.Println(json.UserID, json.ProjectID, json.PageName,json.Content)
+}
+
+
+
+type GetScriptPageNameBody struct {
+	ID          string `json:"id" validate:"required"`
+	ProjectID   string `json:"proid" validate:"required"`
+	PageName    string `json:"pagename" validate:"required"`
+}
+
+
+func GetScriptPageName(c *gin.Context) {
+	var json editpagebody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+		return
+	}
+fmt.Println("ID",json.ID, "ProdID",json.ProjectID, json.PageName)
+
+	ProjectPath := fmt.Sprintf("user_project_path/%s/%s/%s", json.ID, json.ProjectID, json.PageName)
+	// Read the content of the file
+	fileContent, readErr := ioutil.ReadFile(ProjectPath)
+	if readErr != nil {
+		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Read File Failed", "error": readErr.Error()})
+		return
+	}
+
+	contentString := string(fileContent)
+
+	// Now 'contentString' contains the content of the file
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Read File Successfully", "content": contentString})
+}
+
+
+type SaveFuncScriptBody struct {
+	ID          string `json:"id" validate:"required"`
+	ProjectID   string `json:"proid" validate:"required"`
+	PageName    string `json:"pagename" validate:"required"`
+	ScriptContent string `json:"scriptContent" validate:"required"`
+}
+
+
+func SaveFuncScript(c *gin.Context) {
+	var json SaveFuncScriptBody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+		return
+	}
+	fmt.Println("ID", json.ID, "ProjectID", json.ProjectID, "PageName", json.PageName)
+
+	ProjectPath := fmt.Sprintf("user_project_path/%s/%s/%s.js", json.ID, json.ProjectID, json.PageName)
+
+	// ตรวจสอบหรือสร้างไฟล์ และเพิ่มข้อความเข้าไปในไฟล์
+	file, err := os.OpenFile(ProjectPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to open or create the file", "error": err.Error()})
+		return
+	}
+	defer file.Close()
+
+	// เขียนข้อความเพิ่มเติมเข้าไปในไฟล์
+	if _, err := file.WriteString(json.ScriptContent + "\n"); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to write to the file", "error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Script added successfully"})
 }
