@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>add_author</title>
+    <style>
+      body {
+        margin: 0;
+        /* ลบ margin ที่มีอยู่ตามทั่วไป */
+        padding: 0;
+        /* ลบ padding ที่มีอยู่ตามทั่วไป */
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body>
+    <div id="main">
+      <div
+        id="row-2"
+        class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400"
+        draggable="true"
+      >
+        <input placeholder="TEXT" type="text" id="input-1" draggable="true" />
+        <input
+          placeholder="TEXT"
+          type="text"
+          id="input-2"
+          draggable="true"
+        /><button
+          id="button-2"
+          class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+          type="button"
+          draggable="true"
+          onclick="try{ add_author(); }catch(e){ console.error('Error:', e); }"
+        >
+          Button
+        </button>
+      </div>
+    </div>
+    <script src="add_author.js"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HOME</title>
+<style>
+  body {
+    margin: 0;
+    /* ลบ margin ที่มีอยู่ตามทั่วไป */
+    padding: 0;
+    /* ลบ padding ที่มีอยู่ตามทั่วไป */
+  }
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div id="main">
+  <div
+    id="row-1"
+    class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400"
+    draggable="true"
+  >
+    <div
+      id="col-1"
+      class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/6 items-center"
+      draggable="true"
+    >
+      <img
+        id="image-1"
+        alt="image-1"
+        src="https://via.placeholder.com/150"
+        draggable="true"
+        class="w-1/2 h-4/6 highlighted"
+      />
+
+      <p id="text-1" class="text-black" draggable="true">Text</p>
+      <p id="text-2" class="text-black" draggable="true">Text</p>
+      <button
+        id="button-1"
+        class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+        type="button"
+        draggable="true"
+      >
+        Button
+      </button>
+    </div>
+  </div>
+</div>
+<script src="HOME.js"></script>
+<!-- <script src="/static/1/15/HOME.js"></script> -->

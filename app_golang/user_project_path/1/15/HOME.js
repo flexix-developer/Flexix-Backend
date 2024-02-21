@@ -6,7 +6,7 @@ window.onload = function () {
       })
       .then((response) => response.json())
       .then((data) => {
-        const sourceElement = document.getElementById("Content");
+        const sourceElement = document.getElementById("col-1");
         const container = sourceElement.parentNode;
         container.innerHTML = ""; // Clear the container to prepare for new elements
         data.forEach((item, i) => {
@@ -19,12 +19,12 @@ window.onload = function () {
             child.id = newId; // Set the new id
             // Check and change src for images
           
-// // Check and change src for image-2
-    if (child.tagName === "IMG" && child.id.includes("image-2")) {
+// // Check and change src for image-1
+    if (child.tagName === "IMG" && child.id.includes("image-1")) {
     child.src = item.Product_Image; // Set the new src
   }          
-// // Check and change src for button-0
-                   if (child.id.includes("button-0")) {
+// // Check and change src for button-1
+                   if (child.id.includes("button-1")) {
                     child.addEventListener("click", function () {
                       window.location.href = `Detail.html?id=${item.ID}`;
                       console.log(item.ID);

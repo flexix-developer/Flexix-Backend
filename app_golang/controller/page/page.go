@@ -65,8 +65,6 @@ func CreatePageByID(c *gin.Context) {
   <title>` + json.PageName + `</title>
   <style>
     body {
-      width: ` + json.Width + `; /* กำหนดความกว้างของ body เท่ากับหน้าจอ */
-      height: ` + json.Height + `; /* กำหนดความสูงของ body เท่ากับความสูงของหน้าจอ */
       margin: 0; /* ลบ margin ที่มีอยู่ตามทั่วไป */
       padding: 0; /* ลบ padding ที่มีอยู่ตามทั่วไป */
     }
@@ -103,39 +101,6 @@ func CreatePageByID(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"message": "Page and associated JS file created successfully"})
 }
 
-
-// func ShowPageByProjectID(c *gin.Context) {
-// 	// var jsonBody getpageinprojectbody
-
-// 	userID := c.Param("id")
-// 	projectID := c.Param("projectid")
-// 	dir := fmt.Sprintf("user_project_path/%s/%s/", userID, projectID)
-
-// 	files, err := ioutil.ReadDir(dir)
-// 	if err != nil {
-// 		fmt.Println("Error reading directory:", err)
-// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Internal Server Error"})
-// 		return
-// 	}
-
-// 	var user orm.Project
-//     if err := orm.Db.First(&user,projectID).Error; err != nil {
-//         // หากไม่พบผู้ใช้
-//         c.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "User not found"})
-//         return
-//     }
-// 	fmt.Println(user.ProjectName)
-	
-// 	var fileNames []string
-
-// 	for _, file := range files {
-// 		fileNames = append(fileNames, file.Name())
-// 	}
-
-// 	fmt.Println(fileNames)
-
-// 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Read Success", "UserID": userID, "Projects": projectID ,"ProjectName" : user.ProjectName, "Pages" : fileNames})
-// }
 
 func ShowPageByProjectID(c *gin.Context) {
     userID := c.Param("id")
@@ -187,11 +152,17 @@ func DeletePage(c *gin.Context) {
 
 	// Assuming project.ProjectPath is the path to the directory you want to delete
 	ProjectPath := fmt.Sprintf("user_project_path/%s/%s/%s", json.ID, json.ProjectID, json.PageName)
+	JSProjectPath := fmt.Sprintf("user_project_path/%s/%s/%s", json.ID, json.ProjectID, json.PageName[:len(json.PageName)-5]+".js")
 
 	// Delete the directory and its contents
 	err := os.RemoveAll(ProjectPath)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Delete Page Failed", "error": err.Error()})
+		return
+	}
+	errr := os.RemoveAll(JSProjectPath)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Delete Page Failed", "error": errr.Error()})
 		return
 	}
 
@@ -246,26 +217,6 @@ func EditPage(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Page Renamed Successfully"})
 }
 
-// func updateHTMLFile(filePath, newScriptName string) {
-//     // อ่านเนื้อหาจากไฟล์ .html
-//     htmlContent, err := ioutil.ReadFile(filePath)
-//     if err != nil {
-//         fmt.Println("Error reading HTML file:", err)
-//         return
-//     }
-
-//     // แทนที่ชื่อไฟล์ .js เดิมด้วยชื่อไฟล์ .js ใหม่
-//     updatedHTMLContent := bytes.ReplaceAll(htmlContent, []byte(".js"), []byte(newScriptName))
-
-//     // เขียนเนื้อหาใหม่กลับไปยังไฟล์ .html
-//     err = ioutil.WriteFile(filePath, updatedHTMLContent, 0644)
-//     if err != nil {
-//         fmt.Println("Error updating HTML file:", err)
-//         return
-//     }
-
-//     fmt.Println("HTML file updated successfully")
-// }
 
 func updateHTMLFile(filePath, newScriptName string , PageName  string) {
     // Read the content from the .html file
@@ -449,4 +400,60 @@ func SaveFuncScript(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Script added successfully"})
+}
+
+
+
+type GetHtmlAndScriptBody struct {
+	ID          string `json:"id" validate:"required"`
+	ProjectID   string `json:"proid" validate:"required"`
+	PageName    string `json:"pagename" validate:"required"`
+}
+
+
+func GetHtmlAndScript(c *gin.Context) {
+	var json GetHtmlAndScriptBody
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+		return
+	}
+fmt.Println("ID",json.ID, "ProdID",json.ProjectID, json.PageName)
+
+	HtmlPage := fmt.Sprintf("user_project_path/%s/%s/%s", json.ID, json.ProjectID, json.PageName+".html")
+	ScriptPage := fmt.Sprintf("user_project_path/%s/%s/%s", json.ID, json.ProjectID, json.PageName+".js")
+	// Read the content of the file
+	HtmlContent, readErr := ioutil.ReadFile(HtmlPage)
+	JsContent, readErr := ioutil.ReadFile(ScriptPage)
+	if readErr != nil {
+		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Read File Failed", "error": readErr.Error()})
+		return
+	}
+
+	HtmlcontentString := string(HtmlContent)
+	JScontentString := string(JsContent)
+
+	// Now 'contentString' contains the content of the file
+	c.JSON(http.StatusOK, gin.H{"status": "success", "message": "Read File Successfully", "html": HtmlcontentString, "js": JScontentString})
+} 
+
+
+
+type PreViewPageBody struct {
+	ID        string `json:"id" validate:"required"`
+	ProjectID string `json:"proid" validate:"required"`
+	PageName  string `json:"pagename" validate:"required"`
+}
+
+func PreViewPage(c *gin.Context) {
+    var json PreViewPageBody
+    if err := c.ShouldBindJSON(&json); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+        return
+    }
+
+    pageURL := "http://localhost:8081/run/"+json.ID+"/"+json.ProjectID+"/" + json.PageName + ".html"
+
+// pageURL := "http://ceproject.thddns.net:3322/run/"+json.ID+"/"+json.ProjectID+"/" + json.PageName + ".html"
+    // ส่ง URL กลับไปยัง client
+    c.JSON(http.StatusOK, gin.H{"url": pageURL})
 }

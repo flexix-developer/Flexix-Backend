@@ -7,6 +7,9 @@ import (
 	ProjectCotroller "flexix_backend/app_golang/controller/project"
 	UserController "flexix_backend/app_golang/controller/user"
 	"flexix_backend/app_golang/middleware"
+	"net/http"
+	"os"
+	"path/filepath"
 
 	"fmt"
 
@@ -32,8 +35,14 @@ func main() {
 
   r := gin.Default()
   config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000"} // ระบุโดเมนของเว็บเบราว์เซอร์
-	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
+	// config.AllowOrigins = []string{"http://localhost:3000"} // ระบุโดเมนของเว็บเบราว์เซอร์
+	config.AllowOrigins = []string{"*"} // ระบุโดเมนของเว็บเบราว์เซอร์
+// config.AllowOrigins = []string{"http://ceproject.thddns.net:3321"} 
+
+  config.AllowCredentials = true
+
+
+  config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Content-Length", "Authorization"}
 //   r.Use(cors.Default())
 r.Use(cors.New(config))
@@ -59,9 +68,72 @@ r.Use(cors.New(config))
   authorized.POST("/editscript",PageCotroller.EditScriptByID)
   authorized.POST("/getscript",PageCotroller.GetScriptPageName)
   authorized.POST("/savefunc",PageCotroller.SaveFuncScript)
+  authorized.POST("/gethtmlandscript",PageCotroller.GetHtmlAndScript)
+  authorized.POST("/preview",PageCotroller.PreViewPage)
   
+ r.Static("/static", "./user_project_path")
+
+    // // Serve a specific file (e.g., HOME.html) under a specific route
+    // r.GET("/home", func(c *gin.Context) {
+    //     c.File("./user_project_path/1/15/HOME.html") // Adjust the path as necessary
+    // })
+
+
+
+
+//  // Serve a specific file (e.g., HOME.html) under a specific route
+//     r.GET("/home", func(c *gin.Context) {
+//         c.File("./user_project_path/1/15/HOME.html") // Adjust the path as necessary
+//     })
+
+//     // Custom handler for serving script files directly from the root
+//     r.GET("/:scriptFile", func(c *gin.Context) {
+//         scriptFile := c.Param("scriptFile")
+//         // Build the actual file path based on the request
+//         // Adjust the directory path as needed to point to where your script files are located
+//         filePath := filepath.Join("./user_project_path/1/15", scriptFile)
+//         // Serve the file if it exists and is a .js file
+//         if filepath.Ext(scriptFile) == ".js" {
+//             c.File(filePath)
+//         } else {
+//             // If not a JS file, you might want to return a 404 or handle differently
+//             c.AbortWithStatus(http.StatusNotFound)
+//         }
+//     })
+
+
+    // Serve a specific user's HTML file
+    r.GET("/run/:userID/:projectID/:fileName", func(c *gin.Context) {
+        userID := c.Param("userID")
+        projectID := c.Param("projectID")
+        fileName := c.Param("fileName")
+
+        // Construct the file path
+        // Ensure the path is safe and cannot traverse directories
+        safeFileName := filepath.Clean(fileName)
+        if filepath.IsAbs(safeFileName) || safeFileName == ".." || safeFileName == "." {
+            c.AbortWithStatus(http.StatusBadRequest)
+            return
+        }
+
+        filePath := filepath.Join("./user_project_path", userID, projectID, safeFileName)
+        
+        // Check if the file exists and is not a directory
+        if info, err := os.Stat(filePath); err != nil || info.IsDir() {
+            c.AbortWithStatus(http.StatusNotFound)
+            return
+        }
+
+        // Serve the HTML file
+        c.File(filePath)
+    })
+
 
 
 
   r.Run("localhost:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+  // r.Run("localhost:3333") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
+    // r.Run("192.168.1.254:8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
 }
