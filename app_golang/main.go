@@ -102,6 +102,13 @@ r.Use(cors.New(config))
 //     })
 
 
+r.Use(func(c *gin.Context) {
+    c.Header("Cache-Control", "no-cache, no-store, must-revalidate") // ห้าม cache
+    c.Header("Pragma", "no-cache") // สำหรับ HTTP/1.0 compatibility
+    c.Header("Expires", "0") // หมดอายุทันที
+    c.Next()
+})
+
     // Serve a specific user's HTML file
     r.GET("/run/:userID/:projectID/:fileName", func(c *gin.Context) {
         userID := c.Param("userID")
