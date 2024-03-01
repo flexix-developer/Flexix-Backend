@@ -16,7 +16,6 @@ type projectbody struct {
 	PName string `json:"name" validate:"require"`
 }
 
-
 func CreateProject(c *gin.Context) {
 	imagePath := "defalt.png"
 	var json projectbody
@@ -59,7 +58,7 @@ if projectQuery.Error == nil && projectQuery.RowsAffected > 0 {
 		ProjectName: json.PName,
 		UserID:      uint(userID),
 		ScreenIMG:   imageData,
-		
+
 	}
 
 	if err := orm.Db.Create(&project).Error; err != nil {
@@ -82,6 +81,28 @@ if projectQuery.Error == nil && projectQuery.RowsAffected > 0 {
 		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Create Project Failed", "error": err.Error()})
 		return
 	}
+	// สร้างไฟล์ JavaScript (.js)
+	jsFilePath := fmt.Sprintf("%s/scripts.js", project.ProjectPath, )
+	jsContent := `// เลือกทุก <a> ในเอกสาร
+ var allLinks = document.querySelectorAll("a");
+
+ // วนลูปผ่านทุก <a> เพื่อลบคำสั่ง onClick
+ allLinks.forEach(function (link) {
+   // ลบคำสั่ง onClick ออก
+   link.removeAttribute("onClick");
+ });` // เนื้อหาพื้นฐานของ JavaScript สามารถแก้ไขได้ตามต้องการ
+
+	// ตรวจสอบว่าไฟล์ JavaScript มีอยู่หรือไม่
+	if _, err := os.Stat(jsFilePath); err == nil {
+		// ถ้ามีอยู่แล้ว คุณอาจต้องการจัดการต่าง ๆ ในที่นี้
+	}
+
+	// สร้างไฟล์ JavaScript
+	if err := os.WriteFile(jsFilePath, []byte(jsContent), os.ModePerm); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Create Project Success"})
 }
@@ -112,6 +133,87 @@ func readImage(filePath string) (string, error) {
 
 	return imageData, nil
 }
+
+// type projectBody struct {
+// 	ID    string `json:"id" validate:"required"`
+// 	PName string `json:"name" validate:"required"`
+// }
+
+// func CreateProject(c *gin.Context) {
+// 	projectDirectory := "user_project_path" // เปลี่ยนเป็นไดเรกทอรีที่คุณต้องการ
+
+// 	// อ่านข้อมูล JSON ที่ส่งมา
+// 	var json projectBody
+// 	if err := c.ShouldBindJSON(&json); err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+// 		return
+// 	}
+
+// 	// ตรวจสอบว่าโฟลเดอร์ของโปรเจคมีอยู่หรือไม่
+// 	projectFolderPath := fmt.Sprintf("%s/%s/%s/", projectDirectory, json.ID, json.PName)
+// 	if _, err := os.Stat(projectFolderPath); err == nil {
+// 		c.JSON(http.StatusConflict, gin.H{"status": "error", "message": "Project already exists"})
+// 		return
+// 	}
+
+// 	// สร้างโฟลเดอร์ของโปรเจค
+// 	err := os.MkdirAll(projectFolderPath, os.ModePerm)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Create Project Failed", "error": err.Error()})
+// 		return
+// 	}
+
+// 	// สร้างไฟล์ JavaScript (.js)
+// 	jsFilePath := fmt.Sprintf("%s/scripts.js", projectFolderPath, )
+// 	jsContent := `// เลือกทุก <a> ในเอกสาร
+// // var allLinks = document.querySelectorAll("a");
+
+// // // วนลูปผ่านทุก <a> เพื่อลบคำสั่ง onClick
+// // allLinks.forEach(function (link) {
+// //   // ลบคำสั่ง onClick ออก
+// //   link.removeAttribute("onClick");
+// // });` // เนื้อหาพื้นฐานของ JavaScript สามารถแก้ไขได้ตามต้องการ
+
+// 	// ตรวจสอบว่าไฟล์ JavaScript มีอยู่หรือไม่
+// 	if _, err := os.Stat(jsFilePath); err == nil {
+// 		// ถ้ามีอยู่แล้ว คุณอาจต้องการจัดการต่าง ๆ ในที่นี้
+// 	}
+
+// 	// สร้างไฟล์ JavaScript
+// 	if err := os.WriteFile(jsFilePath, []byte(jsContent), os.ModePerm); err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+// 		return
+// 	}
+
+// 	c.JSON(http.StatusOK, gin.H{"message": "Page and associated JS file created successfully"})
+// }
+
+// func readImage(filePath string) (string, error) {
+// 	file, err := os.Open(filePath)
+// 	if err != nil {
+// 		return "", err
+// 	}
+// 	defer file.Close()
+
+// 	// รับข้อมูลของไฟล์
+// 	fileInfo, err := file.Stat()
+// 	if err != nil {
+// 		return "", err
+// 	}
+// 	fileSize := fileInfo.Size()
+// 	buffer := make([]byte, fileSize)
+
+// 	// อ่านไฟล์ลงใน buffer
+// 	_, err = file.Read(buffer)
+// 	if err != nil {
+// 		return "", err
+// 	}
+
+// 	// แปลง buffer เป็น base64
+// 	imageData := base64.StdEncoding.EncodeToString(buffer)
+
+// 	return imageData, nil
+// }
 
 
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart</title>
+    <style>
+        body {
+            margin: 0;
+            /* ลบ margin ที่มีอยู่ตามทั่วไป */
+            padding: 0;
+            /* ลบ padding ที่มีอยู่ตามทั่วไป */
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div id="NavBar" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center items-center" draggable="true" style="background-color: #ffffff">
+            <div id="NavContent" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center justify-stretch w-9/12" draggable="true" style="background-color: #ffffff; margin-left: 50px">
+                <img id="Logo-Image" alt="image-2" src="https://img2.pic.in.th/pic/Untitled9ba73114c8eefeb5.png" draggable="true" class="w-36 h-24" style="margin-right: 100px; margin-left: 100px"><a href="home.html" id="BOOK" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Home</a><a href="https://www.w3schools.com" id="E-BOOK" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Fiction</a><a href="https://www.w3schools.com" id="COURSE" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Mystery</a><a href="https://www.w3schools.com" id="NOVEL" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Fantasy</a><a href="https://www.w3schools.com" id="MANGA" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Science</a>
+            </div>
+
+            <div id="row-3" class="flex flex-row flex-wrap p-1 bg-slate-400 justify-center items-center h-11 w-14" draggable="true" style="
+            border-style: solid;
+            border-width: 2px;
+            border-color: #f55733;
+            border-radius: 10px;
+            background-color: #f2f2f2;
+            margin-right: px;
+          ">
+                <a href="https://www.w3schools.com" id="link-2" class="text-sky-600 h-auto" onClick="return false" draggable="true"><img id="image-6" alt="image-6" src="https://www.clipartmax.com/png/small/334-3348656_shopping-cart-basket-store-comments-remove-from-cart-icon.png" draggable="true" class="h-8"></a>
+            </div>
+        </div>
+        <div id="row-1" class="flex flex-row flex-wrap p-1 w-full  max-h-full bg-slate-400" draggable="true" style="background-color: #F57A33;"></div>
+    </div>
+    <script src="cart.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

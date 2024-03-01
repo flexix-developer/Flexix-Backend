@@ -74,6 +74,7 @@ func CreatePageByID(c *gin.Context) {
 <body>
 <div id="main"></div>
 <script src="` + json.PageName + `.js"></script>
+<script src="scripts.js"></script>
 </body>
 </html>`
 
