@@ -2,6 +2,7 @@ package main
 
 import (
 	AuthController "flexix_backend/app_golang/controller/auth"
+	DownLoadController "flexix_backend/app_golang/controller/downloadproject"
 	OtpController "flexix_backend/app_golang/controller/otp"
 	PageCotroller "flexix_backend/app_golang/controller/page"
 	ProjectCotroller "flexix_backend/app_golang/controller/project"
@@ -70,36 +71,11 @@ r.Use(cors.New(config))
   authorized.POST("/savefunc",PageCotroller.SaveFuncScript)
   authorized.POST("/gethtmlandscript",PageCotroller.GetHtmlAndScript)
   authorized.POST("/preview",PageCotroller.PreViewPage)
+  authorized.POST("/downpage",DownLoadController.DownLoadProjectByPage)
+  authorized.POST("/downproject",DownLoadController.DownLoadProject)
   
  r.Static("/static", "./user_project_path")
 
-    // // Serve a specific file (e.g., HOME.html) under a specific route
-    // r.GET("/home", func(c *gin.Context) {
-    //     c.File("./user_project_path/1/15/HOME.html") // Adjust the path as necessary
-    // })
-
-
-
-
-//  // Serve a specific file (e.g., HOME.html) under a specific route
-//     r.GET("/home", func(c *gin.Context) {
-//         c.File("./user_project_path/1/15/HOME.html") // Adjust the path as necessary
-//     })
-
-//     // Custom handler for serving script files directly from the root
-//     r.GET("/:scriptFile", func(c *gin.Context) {
-//         scriptFile := c.Param("scriptFile")
-//         // Build the actual file path based on the request
-//         // Adjust the directory path as needed to point to where your script files are located
-//         filePath := filepath.Join("./user_project_path/1/15", scriptFile)
-//         // Serve the file if it exists and is a .js file
-//         if filepath.Ext(scriptFile) == ".js" {
-//             c.File(filePath)
-//         } else {
-//             // If not a JS file, you might want to return a 404 or handle differently
-//             c.AbortWithStatus(http.StatusNotFound)
-//         }
-//     })
 
 
 r.Use(func(c *gin.Context) {

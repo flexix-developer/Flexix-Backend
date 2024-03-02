@@ -36,7 +36,7 @@
             </div>
         </div>
         <div id="BestSellerContetn" class="flex flex-row flex-wrap p-1 bg-slate-400 w-auto h-auto" draggable="true" style="background-color: #F57A33;"></div>
-        <div id="Content" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 justify-center h-5/6" draggable="true" style="background-color: #ffffff; margin-top: 20px">
+        <div id="Content" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 justify-center h-5/6" draggable="true" style="background-color: #ffffff; margin-top: 50px;">
             <div id="row-5" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-9/12" draggable="true" style="background-color: #ffffff">
                 <div id="col-3" class="flex flex-col flex-wrap p-1 bg-slate-200 w-6/12 items-center h-full" draggable="true" style="background-color: #ffffff">
                     <img id="P-IMG" alt="image-1" src="https://via.placeholder.com/150" draggable="true" class="w-9/12 h-5/6" style="aspect-ratio: 9/16">
@@ -98,14 +98,14 @@
                         </div>
                     </div>
                     <div id="row-12" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 justify-start w-9/12" draggable="true" style="background-color: #ffffff; margin-top: 40px">
-                        <button id="BT-BUY" class="bg-blue-500 text-white font-bold py-2 px-4 rounded w-36" type="button" draggable="true" style="margin-right: 50px; background-color: #f55733">
-                            Buy Now!</button><button id="BT-ADD" class="bg-blue-500 text-white font-bold py-2 px-4 rounded w-36" type="button" draggable="true" style="
+                        <button id="BT-BUY" class="bg-blue-500 text-white font-bold py-2 px-4 rounded w-32" type="button" draggable="true" style="margin-right: 50px; background-color: #f55733">
+                            Buy Now!</button><button id="BT-ADD" class="bg-blue-500 text-white font-bold py-2 px-4 rounded w-32" type="button" draggable="true" style="
                   color: #000000;
                   border-style: solid;
                   border-width: 2px;
                   border-color: #f55733;
                   background-color: #f5573333;
-                ">
+                " onclick="try{ add_book(); }catch(e){ console.error('Error:', e); }">
                             Add to cart
                         </button>
                     </div>
