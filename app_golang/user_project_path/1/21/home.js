@@ -53,6 +53,18 @@ window.onload = function () {
                       console.log(item.ID);
                     });
                   }
+        
+// // Check and change src for BT-Detail
+    if (child.tagName === "BUTTON" && child.id.includes("BT-Detail")) {
+    child.value = item.ID; // Set the new src
+    }          
+// // Check and change src for BT-Detail
+                   if (child.id.includes("BT-Detail")) {
+                    child.addEventListener("click", function () {
+                      window.location.href = `detail.html?id=${item.ID}`;
+                      console.log(item.ID);
+                    });
+                  }
 
 
             
