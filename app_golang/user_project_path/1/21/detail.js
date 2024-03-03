@@ -17,24 +17,23 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error("Error loading product details:", error));
 });
+
 const add_book = async () => {
   // รับค่าจาก input fields
   const Book_ID = document.getElementById("BT-ADD").value;
   const Quantity = document.getElementById("Quantity").value;
 
-
   // สร้าง object สำหรับส่งข้อมูล
   const dataBody = {
-Book_ID:Book_ID,
-  Quantity:Quantity,
+    Book_ID: Book_ID,
+    Quantity: Quantity,
   };
 
   try {
     const response = await fetch("http://127.0.0.1:5000/api/addbusbooks", {
       method: "POST",
-            headers: {
+      headers: {
         "Content-Type": "application/json", // กำหนด Content-Type header เป็น application/json
-        
       },
       body: JSON.stringify(dataBody), // แปลง object เป็นสตริง JSON
     });
@@ -50,3 +49,33 @@ Book_ID:Book_ID,
   }
 };
 
+const deletse = async () => {
+  // รับค่าจาก input fields
+  const Book_ID = document.getElementById("BT-ADD").value;
+  const Quantity = document.getElementById("Quantity").value;
+
+  // สร้าง object สำหรับส่งข้อมูล
+  const dataBody = {
+    Book_ID: Book_ID,
+    Quantity: Quantity,
+  };
+
+  try {
+    const response = await fetch("http://127.0.0.1:5000/api/addbusbooks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // กำหนด Content-Type header เป็น application/json
+      },
+      body: JSON.stringify(dataBody), // แปลง object เป็นสตริง JSON
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json(); // อ่าน JSON จาก response body
+    console.log("Data:", data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
