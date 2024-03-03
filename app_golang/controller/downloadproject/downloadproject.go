@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -81,54 +82,171 @@ type DownLoadProjectBody struct {
 	ProjectID string `json:"proid" validate:"required"`
 	PageName  string `json:"pagename" validate:"required"`
 }
+// func DownLoadProject(c *gin.Context) {
+// 	var json DownLoadProjectBody
+// 	if err := c.ShouldBindJSON(&json); err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+// 		return
+// 	}
+// 	fmt.Println("ID", json.ID, "ProdID", json.ProjectID, "PageName", json.PageName)
+
+// 	projectFolderPath := fmt.Sprintf("user_project_path/%s/%s", json.ID, json.ProjectID)
+
+// 	zipFileName := fmt.Sprintf("user_project_path/%s/%s/%s.zip", json.ID, json.ProjectID,json.ProjectID)
+// 	zipFile, err := os.Create(zipFileName)
+// 	if err != nil {
+// 					fmt.Println("zipContent5")
+
+// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to create zip file", "error": err.Error()})
+// 		return
+// 	}
+// 	defer zipFile.Close()
+
+// 	zipWriter := zip.NewWriter(zipFile)
+// 	defer zipWriter.Close()
+
+// 	err = addFolderContentsToZip(zipWriter, projectFolderPath, "")
+// 	if err != nil {
+
+// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to add folder contents to zip", "error": err.Error()})
+// 		return
+// 	}
+
+// 	if err := zipWriter.Close(); err != nil {
+
+// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to create zip file", "error": err.Error()})
+// 		return
+// 	}
+
+// 	file, err := os.Open(zipFileName)
+// 	if err != nil {
+
+// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to open file", "error": err.Error()})
+// 		return
+// 	}
+// 	defer file.Close()
+
+// 	// Read the entire file into a byte slice
+// 	zipContent, readErr := ioutil.ReadAll(file)
+// 	if readErr != nil {
+
+// 		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Read File Failed", "error": readErr.Error()})
+// 		return
+// 	}
+
+// 	c.Data(http.StatusOK, "application/zip", zipContent)
+// }
+
+// func addFolderContentsToZip(zipWriter *zip.Writer, sourceFolder string, folderPrefix string) error {
+// 	files, err := ioutil.ReadDir(sourceFolder)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	for _, file := range files {
+// 		filePath := filepath.Join(sourceFolder, file.Name())
+// 		zipPath := filepath.Join(folderPrefix, file.Name())
+
+// 		if file.IsDir() {
+// 			err := addFolderContentsToZip(zipWriter, filePath, zipPath)
+// 			if err != nil {
+// 				return err
+// 			}
+// 		} else {
+// 			err := addFileToZip(zipWriter, filePath, zipPath)
+// 			if err != nil {
+// 				return err
+// 			}
+// 		}
+// 	}
+
+// 	return nil
+// }
+
+// func addFileToZip(zipWriter *zip.Writer, filePath string, zipPath string) error {
+// 	fileContent, err := ioutil.ReadFile(filePath)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	zipFileWriter, err := zipWriter.Create(zipPath)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	if _, err := zipFileWriter.Write(fileContent); err != nil {
+// 		return err
+// 	}
+
+// 	return nil
+// }
+
+
 func DownLoadProject(c *gin.Context) {
-	var json DownLoadProjectBody
-	if err := c.ShouldBindJSON(&json); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
-		return
-	}
-	fmt.Println("ID", json.ID, "ProdID", json.ProjectID, "PageName", json.PageName)
+    var json DownLoadProjectBody
+    if err := c.ShouldBindJSON(&json); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"status": "error", "message": "Invalid request body", "error": err.Error()})
+        return
+    }
+    fmt.Println("ID", json.ID, "ProdID", json.ProjectID, "PageName", json.PageName)
 
-	projectFolderPath := fmt.Sprintf("user_project_path/%s/%s", json.ID, json.ProjectID)
+    projectFolderPath := fmt.Sprintf("user_project_path/%s/%s", json.ID, json.ProjectID)
 
-	zipFileName := fmt.Sprintf("user_project_path/%s/%s.zip", json.ID, json.ProjectID)
-	zipFile, err := os.Create(zipFileName)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to create zip file", "error": err.Error()})
-		return
-	}
-	defer zipFile.Close()
+    zipFileName := fmt.Sprintf("user_project_path/%s/%s.zip", json.ID, json.ProjectID,)
+    zipFile, err := os.Create(zipFileName)
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to create zip file", "error": err.Error()})
+        return
+    }
+    defer zipFile.Close()
 
-	zipWriter := zip.NewWriter(zipFile)
-	defer zipWriter.Close()
+    zipWriter := zip.NewWriter(zipFile)
+    defer zipWriter.Close()
 
-	err = addFolderContentsToZip(zipWriter, projectFolderPath, "")
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to add folder contents to zip", "error": err.Error()})
-		return
-	}
+    err = addFolderContentsToZip(zipWriter, projectFolderPath, "")
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to add folder contents to zip", "error": err.Error()})
+        return
+    }
 
-	if err := zipWriter.Close(); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to create zip file", "error": err.Error()})
-		return
-	}
+    if err := zipWriter.Close(); err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to create zip file", "error": err.Error()})
+        return
+    }
 
-	file, err := os.Open(zipFileName)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to open file", "error": err.Error()})
-		return
-	}
-	defer file.Close()
+    file, err := os.Open(zipFileName)
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Failed to open file", "error": err.Error()})
+        return
+    }
+    defer file.Close()
 
-	// Read the entire file into a byte slice
-	zipContent, readErr := ioutil.ReadAll(file)
-	if readErr != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Read File Failed", "error": readErr.Error()})
-		return
-	}
+    // Read the entire file into a byte slice
+    zipContent, readErr := ioutil.ReadAll(file)
+    if readErr != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Read File Failed", "error": readErr.Error()})
+        return
+    }
 
-	c.Data(http.StatusOK, "application/zip", zipContent)
+    // ส่งข้อมูล zip กลับไปยังผู้ใช้
+    c.Data(http.StatusOK, "application/zip", zipContent)
+
+    // ลบไฟล์ .zip หลังจากที่ส่งกลับไปยัง Client
+    if err := file.Close(); err != nil {
+        fmt.Println("Failed to close file:", err)
+    }
+
+    // ลองลบไฟล์อีกครั้ง ให้รอจนกว่าไฟล์จะถูกปิด
+    for i := 0; i < 10; i++ {
+        time.Sleep(100 * time.Millisecond) // รอสักครู่ก่อนที่จะลองลบอีกครั้ง
+        if err := os.Remove(zipFileName); err == nil {
+            break // ถ้าสามารถลบไฟล์ได้ ออกจากลูป
+        }
+    }
 }
+
+
+
 
 func addFolderContentsToZip(zipWriter *zip.Writer, sourceFolder string, folderPrefix string) error {
 	files, err := ioutil.ReadDir(sourceFolder)
