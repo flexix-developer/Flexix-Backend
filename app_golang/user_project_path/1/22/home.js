@@ -1,5 +1,5 @@
 window.onload = function () {
-  fetch("http://127.0.0.1:5000/allbook", {
+  fetch("http://ceproject.thddns.net:3323/allbookforbag", {
     method: "GET", // สามารถเปลี่ยนเป็น 'POST', 'PUT', ถ้ามีความจำเป็น
     headers: {},
   })
@@ -18,6 +18,10 @@ window.onload = function () {
           child.id = newId; // Set the new id
           // Check and change src for images
 
+          // Modify text for ID
+          if (child.id.includes("ID")) {
+            child.textContent = item.ID; // Set the new text
+          }
           // // Check and change src for image-1
           if (child.tagName === "IMG" && child.id.includes("image-1")) {
             child.src = item.Product_Image; // Set the new src
@@ -54,28 +58,3 @@ window.onload = function () {
     })
     .catch((error) => console.error("Error:", error));
 };
-
-
-
-
-const delete_book = async (id) => {
-  try {
-    const response = await fetch(`http://127.0.0.1:5000/api/delete_book?id=${id}`, {
-      method: "DELETE",
-            headers: {
-        "Content-Type": "application/json", // กำหนด Content-Type header เป็น application/json
-        
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json(); // อ่าน JSON จาก response body
-    console.log("Data:", data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
-

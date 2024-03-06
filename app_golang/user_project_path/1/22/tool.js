@@ -1,4 +1,14 @@
-const add_book = async () => {
+
+
+
+
+
+
+
+
+
+
+const Add_Book = async () => {
   // รับค่าจาก input fields
   const name = document.getElementById("BookNameInput").value;
   const price = document.getElementById("PriceInput").value;
@@ -21,7 +31,7 @@ name:name,
   };
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/addbook", {
+    const response = await fetch("http://ceproject.thddns.net:3323/api/addbook", {
       method: "POST",
             headers: {
         "Content-Type": "application/json", // กำหนด Content-Type header เป็น application/json
@@ -36,7 +46,6 @@ name:name,
 
     const data = await response.json(); // อ่าน JSON จาก response body
     console.log("Data:", data);
-alert("Add Book Success!");
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -44,8 +53,8 @@ alert("Add Book Success!");
 
 const Delete_Book = async () => {
   try {
-    const id = document.getElementById("BookIDInput").value;
-    const response = await fetch(`http://127.0.0.1:5000/api/delete_book?id=${id}`, {
+    const id = document.getElementById("DeleteBookIDInput").value;
+    const response = await fetch(`http://ceproject.thddns.net:3323/api/delete_book?id=${id}`, {
       method: "DELETE",
             headers: {
         "Content-Type": "application/json", // กำหนด Content-Type header เป็น application/json
@@ -59,18 +68,17 @@ const Delete_Book = async () => {
 
     const data = await response.json(); // อ่าน JSON จาก response body
     console.log("Data:", data);
-alert("Delete Success");
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
 
-const Update_book = async () => {
+const Update_Book = async () => {
   // รับค่าจาก input fields
-  const name = document.getElementById("BookNameInput111").value;
-  const price = document.getElementById("BookPriceInput111").value;
-  const image = document.getElementById("BookImageInput111").value;
-  const id = document.getElementById("BookIDInput11").value;
+  const name = document.getElementById("UpdateBookNameInput").value;
+  const price = document.getElementById("UpdateBookPriceInput").value;
+  const image = document.getElementById("UpdateBookImageInput").value;
+  const id = document.getElementById("UpdateBookIDInput").value;
 
 
   // สร้าง object สำหรับส่งข้อมูล
@@ -82,7 +90,7 @@ name:name,
   };
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/update_book", {
+    const response = await fetch("http://ceproject.thddns.net:3323/api/update_book", {
       method: "PUT",
             headers: {
         "Content-Type": "application/json", // กำหนด Content-Type header เป็น application/json

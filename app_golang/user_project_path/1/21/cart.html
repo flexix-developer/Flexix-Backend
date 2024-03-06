@@ -1,92 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cart</title>
     <style>
-        body {
-            margin: 0;
-            /* ลบ margin ที่มีอยู่ตามทั่วไป */
-            padding: 0;
-            /* ลบ padding ที่มีอยู่ตามทั่วไป */
-        }
+      body {
+        margin: 0;
+        /* ลบ margin ที่มีอยู่ตามทั่วไป */
+        padding: 0;
+        /* ลบ padding ที่มีอยู่ตามทั่วไป */
+      }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="main">
-        <div id="NavBar" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center items-center" draggable="true" style="background-color: #ffffff">
-            <div id="NavContent" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center justify-stretch w-10/12 font-Alegreya-Sans" draggable="true" style="background-color: #ffffff; margin-left: 50px">
-                <img id="Logo-Image" alt="image-2" src="https://img2.pic.in.th/pic/Untitled9ba73114c8eefeb5.png" draggable="true" class="w-36 h-24" style="margin-right: 100px; margin-left: 100px"><a href="home.html" id="BOOK" class="text-sky-600 text-2xl font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Home</a><a href="ficton.html" id="E-BOOK" class="text-sky-600 text-2xl font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Fiction</a><a href="https://www.w3schools.com" id="COURSE" class="text-sky-600 text-2xl font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Mystery</a><a href="https://www.w3schools.com" id="NOVEL" class="text-sky-600 text-2xl font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Fantasy</a><a href="https://www.w3schools.com" id="MANGA" class="text-sky-600 text-2xl font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Science</a>
-            </div>
+      <div
+        id="NavBar"
+        class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center items-center"
+        draggable="true"
+        style="background-color: #ffffff"
+      >
+        <div
+          id="NavContent"
+          class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center justify-stretch w-10/12 font-Alegreya-Sans"
+          draggable="true"
+          style="background-color: #ffffff; margin-left: 50px"
+        >
+          <img
+            id="Logo-Image"
+            alt="image-2"
+            src="https://img2.pic.in.th/pic/Untitled9ba73114c8eefeb5.png"
+            draggable="true"
+            class="w-36 h-24"
+            style="margin-right: 100px; margin-left: 100px"
+          /><a
+            href="home.html"
+            id="BOOK"
+            class="text-sky-600 text-2xl font-bold"
+            onclick="return false"
+            draggable="true"
+            style="color: #000000; margin-right: 40px"
+            >Home</a
+          ><a
+            href="ficton.html"
+            id="E-BOOK"
+            class="text-sky-600 text-2xl font-bold"
+            onclick="return false"
+            draggable="true"
+            style="color: #000000; margin-right: 40px"
+            >Fiction</a
+          ><a
+            href="https://www.w3schools.com"
+            id="COURSE"
+            class="text-sky-600 text-2xl font-bold"
+            onclick="return false"
+            draggable="true"
+            style="color: #000000; margin-right: 40px"
+            >Mystery</a
+          ><a
+            href="https://www.w3schools.com"
+            id="NOVEL"
+            class="text-sky-600 text-2xl font-bold"
+            onclick="return false"
+            draggable="true"
+            style="color: #000000; margin-right: 40px"
+            >Fantasy</a
+          ><a
+            href="https://www.w3schools.com"
+            id="MANGA"
+            class="text-sky-600 text-2xl font-bold"
+            onclick="return false"
+            draggable="true"
+            style="color: #000000; margin-right: 40px"
+            >Science</a
+          >
+        </div>
 
-            <div id="CartContnetn" class="flex flex-row flex-wrap p-1 bg-slate-400 justify-center items-center h-11 w-14" draggable="true" style="
+        <div
+          id="CartContnetn"
+          class="flex flex-row flex-wrap p-1 bg-slate-400 justify-center items-center h-11 w-14"
+          draggable="true"
+          style="
             border-style: solid;
             border-width: 2px;
             border-color: #f55733;
             border-radius: 10px;
             background-color: #f2f2f2;
             margin-right: px;
-          ">
-                <a href="cart.html" id="link-2" class="text-sky-600 h-auto" onClick="return false" draggable="true"><img id="image-6" alt="image-6" src="https://www.clipartmax.com/png/small/334-3348656_shopping-cart-basket-store-comments-remove-from-cart-icon.png" draggable="true" class="h-8"></a>
-            </div>
+          "
+        >
+          <a
+            href="cart.html"
+            id="link-2"
+            class="text-sky-600 h-auto"
+            onClick="return false"
+            draggable="true"
+            ><img
+              id="image-6"
+              alt="image-6"
+              src="https://www.clipartmax.com/png/small/334-3348656_shopping-cart-basket-store-comments-remove-from-cart-icon.png"
+              draggable="true"
+              class="h-8"
+          /></a>
         </div>
-        <div id="row-1" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400" draggable="true" style="background-color: #f57a33"></div>
-        <div id="row-2" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center" draggable="true" style="background-color: #ffffff">
-            <div id="My-Item-Content" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-8/12" draggable="true" style="border-width: 1px; border-color: #000000; background-color: #ffffff; border-style: none; margin-right: px;">
-                <div id="row-4" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400" draggable="true" style="background-color: #f59b334c">
-                    <p id="text-1" class="text-black w-3/12 text-xl" draggable="true" style="margin-left: 50px;">
-                        Product
-                    </p>
-                    <p id="text-2" class="text-black w-2/12 text-xl" draggable="true">
-                        Unit Price
-                    </p>
+      </div>
+      <div
+        id="row-1"
+        class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400"
+        draggable="true"
+        style="background-color: #f57a33"
+      ></div>
+      <div
+        id="row-2"
+        class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center"
+        draggable="true"
+        style="background-color: #ffffff"
+      >
+        <div
+          id="My-Item-Content"
+          class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-8/12"
+          draggable="true"
+          style="
+            border-width: 1px;
+            border-color: #000000;
+            background-color: #ffffff;
+            border-style: none;
+            margin-right: px;
+          "
+        >
+          <div
+            id="row-4"
+            class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400"
+            draggable="true"
+            style="background-color: #f59b334c"
+          >
+            <p
+              id="text-1"
+              class="text-black w-3/12 text-xl"
+              draggable="true"
+              style="margin-left: 50px"
+            >
+              Product
+            </p>
+            <p id="text-2" class="text-black w-2/12 text-xl" draggable="true">
+              Unit Price
+            </p>
 
-                    <p id="text-3" class="text-black w-2/12 text-xl" draggable="true">
-                        Quantity
-                    </p>
-                    <p id="text-4" class="text-black w-2/12 text-xl" draggable="true">
-                        Total Price
-                    </p>
-                    <p id="text-5" class="text-black w-2/12 text-xl" draggable="true">
-                        Delete
-                    </p>
-                </div>
-                <div id="row-5" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 items-center" draggable="true" style="
+            <p id="text-3" class="text-black w-2/12 text-xl" draggable="true">
+              Quantity
+            </p>
+            <p id="text-4" class="text-black w-2/12 text-xl" draggable="true">
+              Total Price
+            </p>
+            <p id="text-5" class="text-black w-2/12 text-xl" draggable="true">
+              Delete
+            </p>
+          </div>
+          <div
+            id="row-5"
+            class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 items-center"
+            draggable="true"
+            style="
               border-style: dotted;
               border-width: 2px;
               background-color: #f4f0f0;
               border-color: #d4d4d4;
-            ">
-                    <div id="row-7" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-3/12 items-center" draggable="true" style="background-color: #f4f0f0; margin-left: 30px;">
-                        <img id="Pimg" alt="image-8" src="https://via.placeholder.com/150" draggable="true" class="w-24 h-28">
-                        <p id="Pname" class="text-black w-6/12 text-xl" draggable="true">
-                            P-Name
-                        </p>
-                    </div>
-                    <p id="Pprice" class="text-black w-2/12 text-xl" draggable="true" style="margin-left: 20px;">
-                        P-Prie
-                    </p>
-                    <p id="PQuantity" class="text-black w-2/12 text-xl" draggable="true">
-                        P-Quantity
-                    </p>
-                    <p id="PTotal" class="text-black w-2/12 text-xl" draggable="true">
-                        P-Total Price
-                    </p>
-                    <div id="row-8" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-2/12 items-center" draggable="true" style="background-color: #f4f0f0">
-                        <button id="BTDelete" class="bg-blue-500 text-white font-bold py-2 px-4 rounded w-24 h-12" type="button" draggable="true">
-                            Delete
-                        </button>
-                    </div>
-                </div>
+              margin-top: 10px;
+            "
+          >
+            <div
+              id="row-7"
+              class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-3/12 items-center"
+              draggable="true"
+              style="background-color: #f4f0f0; margin-left: 30px"
+            >
+              <img
+                id="Pimg"
+                alt="image-8"
+                src="https://via.placeholder.com/150"
+                draggable="true"
+                class="w-24 h-28"
+              />
+              <p
+                id="Pname"
+                class="text-black w-6/12 text-lg"
+                draggable="true"
+                style="margin-left: 3px"
+              >
+                P-Name
+              </p>
             </div>
+            <div
+              id="row-7444"
+              class="flex flex-row flex-wrap p-1 2/12 max-h-full bg-slate-400 items-center w-2/12"
+              draggable="true"
+              style="background-color: #f4f0f0; margin-left: 30px"
+            >
+              <p id="Pprice" class="text-black text-xl" draggable="true">
+                Price
+              </p>
+              <p
+                id="Dollars"
+                class="text-black text-xl"
+                draggable="true"
+                style="margin-left: px"
+              >
+                $
+              </p>
+            </div>
+            <p
+              id="PQuantity"
+              class="text-black w-2/12 text-xl"
+              draggable="true"
+            >
+              P-Quantity
+            </p>
+            <p id="PTotal" class="text-black w-2/12 text-xl" draggable="true">
+              P-Total Price
+            </p>
+
+            <div
+              id="row-8"
+              class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-2/12 items-center"
+              draggable="true"
+              style="background-color: #f4f0f0"
+            >
+              <button
+                id="BTDelete"
+                class="bg-blue-500 text-white font-bold py-2 px-4 rounded w-24 h-12"
+                type="button"
+                draggable="true"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <script src="cart.js"></script>
     <script src="scripts.js"></script>
-</body>
-
+  </body>
 </html>

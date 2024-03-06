@@ -452,9 +452,9 @@ func PreViewPage(c *gin.Context) {
         return
     }
 
-    pageURL := "http://localhost:8081/run/"+json.ID+"/"+json.ProjectID+"/" + json.PageName + ".html"
+    // pageURL := "http://localhost:8081/run/"+json.ID+"/"+json.ProjectID+"/" + json.PageName + ".html"
 
-// pageURL := "http://ceproject.thddns.net:3322/run/"+json.ID+"/"+json.ProjectID+"/" + json.PageName + ".html"
+pageURL := "http://ceproject.thddns.net:3322/run/"+json.ID+"/"+json.ProjectID+"/" + json.PageName + ".html"
     // ส่ง URL กลับไปยัง client
     c.JSON(http.StatusOK, gin.H{"url": pageURL})
 }

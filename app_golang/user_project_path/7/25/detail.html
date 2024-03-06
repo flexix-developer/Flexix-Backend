@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>detail</title>
-
     <style>
         body {
             margin: 0;
@@ -19,20 +18,18 @@
 
 <body>
     <div id="main">
-        <div id="NavBar" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center items-center" draggable="true" style="background-color: #ffffff">
-            <div id="NavContent" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center justify-stretch w-10/12" draggable="true" style="background-color: #ffffff; margin-left: 50px">
-                <img id="Logo-Image" alt="image-2" src="https://img2.pic.in.th/pic/Untitled9ba73114c8eefeb5.png" draggable="true" class="w-36 h-24" style="margin-right: 100px; margin-left: 100px"><a href="home.html" id="BOOK" class="text-sky-600 text-2xl font-Alegreya-Sans font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Home</a><a href="fiction.html" id="E-BOOK" class="text-sky-600 text-2xl font-Alegreya-Sans font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Fiction</a><a href="mystery.html" id="COURSE" class="text-sky-600 text-2xl font-Alegreya-Sans font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Mystery</a><a href="fantasy.html" id="NOVEL" class="text-sky-600 text-2xl font-Alegreya-Sans font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Fantasy</a><a href="science.html" id="MANGA" class="text-sky-600 text-2xl font-Alegreya-Sans font-bold" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Science</a>
+        <div id="row-1" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 justify-center items-center h-24 font-sans" draggable="true" style="background-color: #ffffff">
+            <div id="row-2" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-10/12 items-center" draggable="true" style="background-color: #ffffffff">
+                <img id="image-1" alt="image-1" src="https://img2.pic.in.th/pic/Untitled9ba73114c8eefeb5.png" draggable="true" class="w-28 h-20" style="margin-right: 100px; margin-left: 100px"><a href="home.html" id="link-1" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Home</a><a href="https://www.w3schools.com" id="link-2" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Fiction</a><a href="https://www.w3schools.com" id="link-3" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Mystery</a><a href="https://www.w3schools.com" id="link-4" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Fantasy</a><a href="https://www.w3schools.com" id="link-5" class="text-sky-600 text-2xl" onclick="return false" draggable="true" style="color: #000000; margin-right: 40px">Science</a>
             </div>
-
-            <div id="row-3" class="flex flex-row flex-wrap p-1 bg-slate-400 justify-center items-center h-11 w-14" draggable="true" style="
+            <div id="row-101" class="flex flex-row flex-wrap p-1 bg-slate-400 w-11 h-10" draggable="true" style="
+            background-color: #ffffff;
             border-style: solid;
             border-width: 2px;
-            border-color: #f55733;
             border-radius: 10px;
-            background-color: #f2f2f2;
-            margin-right: px;
+            border-color: #f55733;
           ">
-                <a href="cart.html" id="link-2" class="text-sky-600 h-auto" onClick="return false" draggable="true"><img id="image-6" alt="image-6" src="https://www.clipartmax.com/png/small/334-3348656_shopping-cart-basket-store-comments-remove-from-cart-icon.png" draggable="true" class="h-8"></a>
+                <a href="https://www.w3schools.com" id="link-6" class="text-sky-600" onClick="return false" ; draggable="true"><img id="image-dsds" alt="image-4" src="https://www.clipartmax.com/png/small/334-3348656_shopping-cart-basket-store-comments-remove-from-cart-icon.png" draggable="true"></a>
             </div>
         </div>
         <div id="BestSellerContetn" class="flex flex-row flex-wrap p-1 bg-slate-400 w-auto h-auto" draggable="true" style="background-color: #f57a33"></div>
@@ -105,7 +102,7 @@
                   border-width: 2px;
                   border-color: #f55733;
                   background-color: #f5573333;
-                " onclick="try{ add_book_in_basket(); }catch(e){ console.error('Error:', e); }">
+                " onclick="try{ Add_Book(); }catch(e){ console.error('Error:', e); }">
                             Add to cart
                         </button>
                     </div>

@@ -1,123 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+    <style>
+      body {
+        margin: 0;
+        /* ลบ margin ที่มีอยู่ตามทั่วไป */
+        padding: 0;
+        /* ลบ padding ที่มีอยู่ตามทั่วไป */
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>home</title>
-	<style>
-		body {
-			margin: 0;
-			/* ลบ margin ที่มีอยู่ตามทั่วไป */
-			padding: 0;
-			/* ลบ padding ที่มีอยู่ตามทั่วไป */
-		}
-	</style>
-	<script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
-	<div id="main" style="background-color: #ffffff">
-		<div id="col-1" class="flex flex-col flex-wrap p-1 w-full max-h-full bg-slate-200 font-Alegreya-Sans items-center" draggable="true" style="background-color: #fbe5cb">
-			<div id="row-1" class="flex flex-row flex-wrap p-1 bg-slate-400 items-center w-9/12 h-24" draggable="true" style="
+  <body>
+    <div id="main" style="background-color: #ffffff">
+      <div
+        id="col-1"
+        class="flex flex-col flex-wrap p-1 w-full max-h-full bg-slate-200 font-Alegreya-Sans items-center"
+        draggable="true"
+        style="background-color: #fbe5cb"
+      >
+        <div
+          id="row-1"
+          class="flex flex-row flex-wrap p-1 bg-slate-400 items-center w-9/12 h-24"
+          draggable="true"
+          style="
             background-color: #fbe5cbff;
             border-color: #c4c4c4;
             border-width: 1px;
             border-radius: 5px;
             border-style: none;
-          ">
-				<div id="logo" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 justify-center w-auto" draggable="true" style="background-color: #f57a3319; border-radius: 2px">
-					<p id="text-1" class="text-black font-bold justify-center text-4xl" draggable="true">
-						FlexixAdmin
-					</p>
-				</div>
-				<div id="alink" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-6/12" draggable="true" style="background-color: #fbe5cbff; margin-left: 50px">
-					<a href="home.html" id="link-1" class="text-sky-600 font-bold text-2xl" onClick="return false" draggable="true" style="
+          "
+        >
+          <div
+            id="logo"
+            class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 justify-center w-auto"
+            draggable="true"
+            style="background-color: #f57a3319; border-radius: 2px"
+          >
+            <p
+              id="text-1"
+              class="text-black font-bold justify-center text-4xl"
+              draggable="true"
+            >
+              FlexixAdmin
+            </p>
+          </div>
+          <div
+            id="alink"
+            class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-6/12"
+            draggable="true"
+            style="background-color: #fbe5cbff; margin-left: 50px"
+          >
+            <a
+              href="home.html"
+              id="link-1"
+              class="text-sky-600 font-bold text-2xl"
+              onClick="return false"
+              draggable="true"
+              style="
                 color: #000000;
                 background-color: #f57a3319;
                 border-radius: 2px;
                 margin-right: 50px;
-              ">Home</a><a href="tool.html" id="link-2" class="text-sky-600 font-bold text-2xl" onClick="return false" draggable="true" style="
+              "
+              >Home</a
+            ><a
+              href="tool.html"
+              id="link-2"
+              class="text-sky-600 font-bold text-2xl"
+              onClick="return false"
+              draggable="true"
+              style="
                 color: #000000;
                 background-color: #f57a3319;
                 border-radius: 2px;
-              ">Tools</a>
-				</div>
-			</div>
-			<div id="title" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 justify-center h-14" draggable="true" style="background-color: #ffffff">
-				<div id="col-22" class="flex flex-col flex-wrap p-1 bg-slate-200 w-9/12 h-auto" draggable="true" style="
+              "
+              >Tools</a
+            >
+          </div>
+        </div>
+        <div
+          id="title"
+          class="flex flex-row flex-wrap p-1 w-full bg-slate-400 justify-center h-14"
+          draggable="true"
+          style="background-color: #ffffff"
+        >
+          <div
+            id="col-22"
+            class="flex flex-col flex-wrap p-1 bg-slate-200 w-9/12 h-auto"
+            draggable="true"
+            style="
               border-style: solid;
               border-color: #8c8c8c;
               border-width: 2px;
               border-radius: 5px;
               margin-bottom: 20px;
               background-color: #f55733;
-            ">
-					<div id="row-33" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 items-center h-full" draggable="true" style="background-color: #fdeedd">
-						<p id="BookName222" class="text-black font-bold text-xl w-2/12 text-center" draggable="true">
-							Image
-						</p>
-						<p id="ProductPrice222" class="text-black text-xl font-bold w-2/12 text-center" draggable="true">
-							Name
-						</p>
-						<p id="AuthorName333" class="text-black text-xl font-bold w-1/12 text-center" draggable="true">
-							Price
-						</p>
+            "
+          >
+            <div
+              id="row-33"
+              class="flex flex-row flex-wrap p-1 w-full bg-slate-400 items-center h-full"
+              draggable="true"
+              style="background-color: #fdeedd"
+            >
+              <p
+                id="ID222"
+                class="text-black font-bold text-xl w-2/12 text-center"
+                draggable="true"
+              >
+                ID
+              </p>
+              <p
+                id="BookName222"
+                class="text-black font-bold text-xl w-2/12 text-center"
+                draggable="true"
+              >
+                Image
+              </p>
+              <p
+                id="ProductPrice222"
+                class="text-black text-xl font-bold w-2/12 text-center"
+                draggable="true"
+              >
+                Name
+              </p>
+              <p
+                id="AuthorName333"
+                class="text-black text-xl font-bold w-1/12 text-center"
+                draggable="true"
+              >
+                Price
+              </p>
 
-						<p id="CateName444" class="text-black text-xl font-bold w-1/12 text-center" draggable="true">
-							Author
-						</p>
+              <p
+                id="CateName444"
+                class="text-black text-xl font-bold w-1/12 text-center"
+                draggable="true"
+              >
+                Author
+              </p>
 
-						<p id="text-2" class="text-black font-bold text-xl w-1/12 text-center" draggable="true">
-							Caegory
-						</p>
-						<p id="text-3" class="text-black text-xl font-bold text-center w-1/12" draggable="true">
-							InStock
-						</p>
-					</div>
-				</div>
-			</div>
-			<div id="content" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center" draggable="true" style="background-color: #ffffff">
-				<div id="col-2" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-9/12" draggable="true" style="
+              <p
+                id="text-2"
+                class="text-black font-bold text-xl w-1/12 text-center"
+                draggable="true"
+              >
+                Caegory
+              </p>
+              <p
+                id="text-3"
+                class="text-black text-xl font-bold text-center w-1/12"
+                draggable="true"
+              >
+                InStock
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          id="content"
+          class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center"
+          draggable="true"
+          style="background-color: #ffffff"
+        >
+          <div
+            id="col-2"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-9/12"
+            draggable="true"
+            style="
               border-style: solid;
               border-color: #8c8c8c;
               border-width: 2px;
               border-radius: 5px;
               margin-bottom: 20px;
               background-color: #f55733;
-            ">
-					<div id="row-3" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 items-center h-auto" draggable="true" style="background-color: #fdeedd">
-						<div id="row-4" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center w-2/12 justify-center" draggable="true" style="background-color: #fdeedd">
-							<img id="image-1" alt="image-1" src="https://via.placeholder.com/150" draggable="true" class="h-36 w-32">
-						</div>
-						<p id="BookName" class="text-black font-bold text-xl w-2/12 text-center" draggable="true">
-							BOOK NAME
-						</p>
-						<p id="ProductPrice" class="text-black text-xl font-bold w-1/12 text-center" draggable="true">
-							Price
-						</p>
-						<p id="AuthorName" class="text-black text-xl font-bold w-1/12 text-center" draggable="true">
-							Author
-						</p>
+            "
+          >
+            <div
+              id="row-3"
+              class="flex flex-row flex-wrap p-1 w-full bg-slate-400 items-center h-auto"
+              draggable="true"
+              style="background-color: #fdeedd"
+            >
+              <div
+                id="row-421"
+                class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center w-2/12 justify-center"
+                draggable="true"
+                style="background-color: #fdeedd"
+              >
+                <p
+                  id="ID"
+                  class="text-black font-bold text-xl w-2/12 text-center"
+                  draggable="true"
+                >
+                  ID
+                </p>
+              </div>
+              <div
+                id="row-4"
+                class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center w-2/12 justify-center"
+                draggable="true"
+                style="background-color: #fdeedd"
+              >
+                <img
+                  id="image-1"
+                  alt="image-1"
+                  src="https://via.placeholder.com/150"
+                  draggable="true"
+                  class="h-36 w-32"
+                />
+              </div>
+              <p
+                id="BookName"
+                class="text-black font-bold text-xl w-2/12 text-center"
+                draggable="true"
+              >
+                BOOK NAME
+              </p>
+              <p
+                id="ProductPrice"
+                class="text-black text-xl font-bold w-1/12 text-center"
+                draggable="true"
+              >
+                Price
+              </p>
+              <p
+                id="AuthorName"
+                class="text-black text-xl font-bold w-1/12 text-center"
+                draggable="true"
+              >
+                Author
+              </p>
 
-						<p id="CateName" class="text-black text-xl font-bold w-1/12 text-center" draggable="true" style="margin-left: px">
-							Cate
-						</p>
-						<p id="InStock" class="text-black text-xl font-bold w-1/12 text-center" draggable="true">
-							Stok
-						</p>
-						<div id="row-5" class="flex flex-row flex-wrap p-1 bg-slate-400 h-auto w-4/12 justify-center" draggable="true" style="background-color: #fdeedd">
-							<button id="button-1" class="bg-blue-500 text-white font-bold py-2 px-4 rounded" type="button" draggable="true" style="background-color: #f95d5d" onclick="try{ delete_book(dataset.id); }catch(e){ console.error('Error:', e); }">
-								Delete
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script src="home.js"></script>
-	<script src="scripts.js"></script>
-</body>
-
+              <p
+                id="CateName"
+                class="text-black text-xl font-bold w-1/12 text-center"
+                draggable="true"
+                style="margin-left: px"
+              >
+                Cate
+              </p>
+              <p
+                id="InStock"
+                class="text-black text-xl font-bold w-1/12 text-center"
+                draggable="true"
+              >
+                Stok
+              </p>
+              <div
+                id="row-5"
+                class="flex flex-row flex-wrap p-1 bg-slate-400 h-auto justify-center w-2/12"
+                draggable="true"
+                style="background-color: #fdeedd"
+              >
+                <button
+                  id="button-1"
+                  class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+                  type="button"
+                  draggable="true"
+                  style="background-color: #f95d5d"
+                  onclick="try{ delete_book(dataset.id); }catch(e){ console.error('Error:', e); }"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="home.js"></script>
+    <script src="scripts.js"></script>
+  </body>
 </html>

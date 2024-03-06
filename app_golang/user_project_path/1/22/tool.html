@@ -1,167 +1,514 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>tool</title>
 <style>
-    body {
-        margin: 0;
-        /* ลบ margin ที่มีอยู่ตามทั่วไป */
-        padding: 0;
-        /* ลบ padding ที่มีอยู่ตามทั่วไป */
-    }
+  body {
+    margin: 0;
+    /* ลบ margin ที่มีอยู่ตามทั่วไป */
+    padding: 0;
+    /* ลบ padding ที่มีอยู่ตามทั่วไป */
+  }
 </style>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <div id="main">
-    <div id="col-1" class="flex flex-col flex-wrap p-1 w-full max-h-full bg-slate-200 font-Alegreya-Sans items-center" draggable="true" style="background-color: #fbe5cb">
-        <div id="row-1" class="flex flex-row flex-wrap p-1 bg-slate-400 items-center w-9/12 h-24" draggable="true" style="
+  <div
+    id="col-1"
+    class="flex flex-col flex-wrap p-1 w-full max-h-full bg-slate-200 font-Alegreya-Sans items-center"
+    draggable="true"
+    style="background-color: #fbe5cb"
+  >
+    <div
+      id="row-1"
+      class="flex flex-row flex-wrap p-1 bg-slate-400 items-center w-9/12 h-24"
+      draggable="true"
+      style="
         background-color: #fbe5cbff;
         border-color: #c4c4c4;
         border-width: 1px;
         border-radius: 5px;
         border-style: none;
-      ">
-            <div id="logo" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 justify-center w-auto" draggable="true" style="background-color: #f57a3319; border-radius: 2px">
-                <p id="text-1" class="text-black font-bold justify-center text-4xl" draggable="true">
-                    FlexixAdmin
-                </p>
-            </div>
-            <div id="alink" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-6/12" draggable="true" style="background-color: #fbe5cbff; margin-left: 50px">
-                <a href="home.html" id="link-1" class="text-sky-600 font-bold text-2xl" onclick="return false" draggable="true" style="
+      "
+    >
+      <div
+        id="logo"
+        class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 justify-center w-auto"
+        draggable="true"
+        style="background-color: #f57a3319; border-radius: 2px"
+      >
+        <p
+          id="text-1"
+          class="text-black font-bold justify-center text-4xl"
+          draggable="true"
+        >
+          FlexixAdmin
+        </p>
+      </div>
+      <div
+        id="alink"
+        class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-6/12"
+        draggable="true"
+        style="background-color: #fbe5cbff; margin-left: 50px"
+      >
+        <a
+          href="home.html"
+          id="link-1"
+          class="text-sky-600 font-bold text-2xl"
+          onclick="return false"
+          draggable="true"
+          style="
             color: #000000;
             background-color: #f57a3319;
             border-radius: 2px;
             margin-right: 50px;
-          ">Home</a><a href="tool.html" id="link-2" class="text-sky-600 font-bold text-2xl" onclick="return false" draggable="true" style="
+          "
+          >Home</a
+        ><a
+          href="tool.html"
+          id="link-2"
+          class="text-sky-600 font-bold text-2xl"
+          onclick="return false"
+          draggable="true"
+          style="
             color: #000000;
             background-color: #f57a3319;
             border-radius: 2px;
-          ">Tools</a>
-            </div>
-        </div>
-        <div id="row-2" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-full justify-center" draggable="true" style="background-color: #f8f3f1">
-            <div id="col-2" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-9/12" draggable="true" style="
-          background-color: #fdeedd;
-          border-color: #f55733;
-          border-style: solid;
-          border-width: 4px;
-          margin-bottom: 10px;
-        ">
-                <p id="text-2" class="text-black text-xl font-bold" draggable="true" style="
-            border-width: 2px;
-            margin-left: px;
-            background-color: #fdeedd;
-            border-color: #fdeedd;
-            border-style: none;
-          ">
-                    Add Book :
-                </p>
-                <div id="row-3" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400" draggable="true" style="background-color: #f55733">
-                    <div id="col-4" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-1" class="text-black font-bold" draggable="true" for="BookNameInput">Book Name</label>
-                        <input type="text" id="BookNameInput" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-5" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-1/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-4" class="text-black font-bold" draggable="true" for="PriceInput">Pice</label>
-                        <input type="text" id="PriceInput" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-6" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-1/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-5" class="text-black font-bold" draggable="true" for="DetailInput">Detail</label>
-                        <input type="text" id="DetailInput" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-7" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-1/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-6" class="text-black font-bold" draggable="true" for="InStockInput">InStock</label>
-                        <input type="text" id="InStockInput" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-8" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-7" class="text-black font-bold" draggable="true" for="ImageInput">link-Image</label>
-                        <input type="text" id="ImageInput" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-9" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-1/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-8" class="text-black font-bold" draggable="true" for="AuthorIDInput">Auth ID</label>
-                        <input type="text" id="AuthorIDInput" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-10" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-9" class="text-black font-bold" draggable="true" for="CateInput">Category ID</label>
-                        <input type="text" id="CateInput" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-11" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <button id="Add-BT" class="bg-blue-500 text-white font-bold py-2 px-4 rounded w-full h-full" type="button" draggable="true" style="background-color: #34f000; color: #f8f7f7" onclick="try{ add_book(); }catch(e){ console.error('Error:', e); }">
-                            ADD
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div id="col-22" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-9/12" draggable="true" style="
-          background-color: #fdeedd;
-          border-color: #f55733;
-          border-style: solid;
-          border-width: 4px;
-          margin-bottom: 10px;
-        ">
-                <p id="text-22" class="text-black text-xl font-bold" draggable="true" style="
-            border-width: 2px;
-            margin-left: px;
-            background-color: #fdeedd;
-            border-color: #fdeedd;
-            border-style: none;
-          ">
-                    Delete Book :
-                </p>
-                <div id="row-33" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400" draggable="true" style="background-color: #f55733">
-                    <div id="col-44" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-11" class="text-black font-bold" draggable="true" for="BookIDInput">Book ID</label>
-                        <input type="text" id="BookIDInput" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-111" class="flex flex-col flex-wrap p-1 bg-slate-200 h-auto items-end w-8/12" draggable="true" style="background-color: #fbe5cb"></div>
-                    <div id="col-1112" class="flex flex-col flex-wrap p-1 bg-slate-200 h-auto items-end w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <button id="Delete-BT" class="bg-blue-500 text-white font-bold py-2 px-4 rounded h-full w-full" type="button" draggable="true" style="background-color: #f00000; color: #fdfcfc" onclick="try{ Delete_Book(); }catch(e){ console.error('Error:', e); }">
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div id="col-222" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-9/12" draggable="true" style="
-          background-color: #fdeedd;
-          border-color: #f55733;
-          border-style: solid;
-          border-width: 4px;
-        ">
-                <p id="text-222" class="text-black text-xl font-bold" draggable="true" style="
-            border-width: 2px;
-            margin-left: px;
-            background-color: #fdeedd;
-            border-color: #fdeedd;
-            border-style: none;
-          ">
-                    Update Book :
-                </p>
-                <div id="row-333" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400" draggable="true" style="background-color: #f55733">
-                    <div id="col-44444" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-11111" class="text-black font-bold" draggable="true" for="BookIDInput11">Book ID</label>
-                        <input type="text" id="BookIDInput11" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-444441" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-111111" class="text-black font-bold" draggable="true" for="BookImageInput111">Book Image</label>
-                        <input type="text" id="BookImageInput111" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-444442" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-111112" class="text-black font-bold" draggable="true" for="BookNameInput111">Book Name</label>
-                        <input type="text" id="BookNameInput111" name placeholder draggable="true" class="w-full">
-                    </div>
-                    <div id="col-444443" class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12" draggable="true" style="background-color: #fbe5cb">
-                        <label id="label-111113" class="text-black font-bold h-auto" draggable="true" for="BookPriceInput111">Book Price</label>
-                        <input type="text" id="BookPriceInput111" name placeholder draggable="true" class="w-full">
-                    </div>
-
-                    <div id="col-11121" class="flex flex-col flex-wrap p-1 bg-slate-200 h-auto items-end w-4/12" draggable="true" style="background-color: #fbe5cb">
-                        <button id="Update-BT" class="bg-blue-500 text-white font-bold py-2 px-4 rounded h-full w-6/12" type="button" draggable="true" style="color: #fdfcfc; background-color: #f0bc00" onclick="try{ Update_book(); }catch(e){ console.error('Error:', e); }">
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+          "
+          >Tools</a
+        >
+      </div>
     </div>
+    <div
+      id="row-2"
+      class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-full justify-center"
+      draggable="true"
+      style="background-color: #f8f3f1"
+    >
+      <div
+        id="AddBookContent"
+        class="flex flex-col flex-wrap p-1 bg-slate-200 h-32 w-8/12"
+        draggable="true"
+        style="
+          background-color: #fdeedd;
+          border-color: #f55733;
+          border-style: solid;
+          border-width: 4px;
+          margin-bottom: 30px;
+        "
+      >
+        <p
+          id="text-2"
+          class="text-black text-xl font-bold"
+          draggable="true"
+          style="
+            border-width: 2px;
+            margin-left: px;
+            background-color: #fdeedd;
+            border-color: #fdeedd;
+            border-style: none;
+          "
+        >
+          Add Book :
+        </p>
+        <div
+          id="row-3"
+          class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400"
+          draggable="true"
+          style="background-color: #f55733"
+        >
+          <div
+            id="col-4"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-1"
+              class="text-black font-bold"
+              draggable="true"
+              for="BookNameInput"
+              >Book Name</label
+            >
+            <input
+              type="text"
+              id="BookNameInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-5"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-1/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-4"
+              class="text-black font-bold"
+              draggable="true"
+              for="PriceInput"
+              >Pice</label
+            >
+            <input
+              type="text"
+              id="PriceInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-6"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-1/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-5"
+              class="text-black font-bold"
+              draggable="true"
+              for="DetailInput"
+              >Detail</label
+            >
+            <input
+              type="text"
+              id="DetailInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-7"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-1/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-6"
+              class="text-black font-bold"
+              draggable="true"
+              for="InStockInput"
+              >InStock</label
+            >
+            <input
+              type="text"
+              id="InStockInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-8"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-7"
+              class="text-black font-bold"
+              draggable="true"
+              for="ImageInput"
+              >link-Image</label
+            >
+            <input
+              type="text"
+              id="ImageInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-9"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-1/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-8"
+              class="text-black font-bold"
+              draggable="true"
+              for="AuthorIDInput"
+              >Auth ID</label
+            >
+            <input
+              type="text"
+              id="AuthorIDInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-10"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-9"
+              class="text-black font-bold"
+              draggable="true"
+              for="CateInput"
+              >Category ID</label
+            >
+            <input
+              type="text"
+              id="CateInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-11"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <button
+              id="Add-BT"
+              class="bg-blue-500 text-white font-bold py-2 px-4 rounded w-full h-full"
+              type="button"
+              draggable="true"
+              style="background-color: #34f000; color: #f8f7f7"
+              onclick="try{ Add_Book(); }catch(e){ console.error('Error:', e); }"
+            >
+              ADD
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        id="DeleteBookContent"
+        class="flex flex-col flex-wrap p-1 bg-slate-200 h-32 w-8/12"
+        draggable="true"
+        style="
+          background-color: #fdeedd;
+          border-color: #f55733;
+          border-style: solid;
+          border-width: 4px;
+          margin-bottom: 30px;
+        "
+      >
+        <p
+          id="text-22"
+          class="text-black text-xl font-bold"
+          draggable="true"
+          style="
+            border-width: 2px;
+            margin-left: px;
+            background-color: #fdeedd;
+            border-color: #fdeedd;
+            border-style: none;
+          "
+        >
+          Delete Book :
+        </p>
+        <div
+          id="row-33"
+          class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400"
+          draggable="true"
+          style="background-color: #f55733"
+        >
+          <div
+            id="col-44"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-11"
+              class="text-black font-bold"
+              draggable="true"
+              for="DeleteBookIDInput"
+              >Book ID</label
+            >
+            <input
+              type="text"
+              id="DeleteBookIDInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-111"
+            class="flex flex-col flex-wrap p-1 bg-slate-200 h-auto items-end w-8/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          ></div>
+          <div
+            id="col-1112"
+            class="flex flex-col flex-wrap p-1 bg-slate-200 h-auto items-end w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <button
+              id="Delete-BT"
+              class="bg-blue-500 text-white font-bold py-2 px-4 rounded h-full w-full"
+              type="button"
+              draggable="true"
+              style="background-color: #f00000; color: #fdfcfc"
+              onclick="try{ Delete_Book(); }catch(e){ console.error('Error:', e); }"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        id="UpdateBookContent"
+        class="flex flex-col flex-wrap p-1 bg-slate-200 h-32 w-8/12"
+        draggable="true"
+        style="
+          background-color: #fdeedd;
+          border-color: #f55733;
+          border-style: solid;
+          border-width: 4px;
+        "
+      >
+        <p
+          id="text-222"
+          class="text-black text-xl font-bold"
+          draggable="true"
+          style="
+            border-width: 2px;
+            margin-left: px;
+            background-color: #fdeedd;
+            border-color: #fdeedd;
+            border-style: none;
+          "
+        >
+          Update Book :
+        </p>
+        <div
+          id="row-333"
+          class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400"
+          draggable="true"
+          style="background-color: #f55733"
+        >
+          <div
+            id="col-44444"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-11111"
+              class="text-black font-bold"
+              draggable="true"
+              for="UpdateBookIDInput"
+              >Book ID</label
+            >
+            <input
+              type="text"
+              id="UpdateBookIDInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-444441"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-111111"
+              class="text-black font-bold"
+              draggable="true"
+              for="UpdateBookImageInput"
+              >Book Image</label
+            >
+            <input
+              type="text"
+              id="UpdateBookImageInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-444442"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-111112"
+              class="text-black font-bold"
+              draggable="true"
+              for="UpdateBookNameInput"
+              >Book Name</label
+            >
+            <input
+              type="text"
+              id="UpdateBookNameInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+          <div
+            id="col-444443"
+            class="flex flex-col flex-wrap p-1 max-h-full bg-slate-200 w-2/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <label
+              id="label-111113"
+              class="text-black font-bold h-auto"
+              draggable="true"
+              for="UpdateBookPriceInput"
+              >Book Price</label
+            >
+            <input
+              type="text"
+              id="UpdateBookPriceInput"
+              name
+              placeholder
+              draggable="true"
+              class="w-full"
+            />
+          </div>
+
+          <div
+            id="col-11121"
+            class="flex flex-col flex-wrap p-1 bg-slate-200 h-auto items-end w-4/12"
+            draggable="true"
+            style="background-color: #fbe5cb"
+          >
+            <button
+              id="Update-BT"
+              class="bg-blue-500 text-white font-bold py-2 px-4 rounded h-full w-6/12"
+              type="button"
+              draggable="true"
+              style="color: #fdfcfc; background-color: #f0bc00"
+              onclick="try{ Update_Book(); }catch(e){ console.error('Error:', e); }"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="tool.js"></script>
 <script src="scripts.js"></script>
