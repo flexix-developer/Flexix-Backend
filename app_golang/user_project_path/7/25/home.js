@@ -27,8 +27,21 @@ window.onload = function () {
 // // Check and change src for button-1
                    if (child.id.includes("button-1")) {
                     child.addEventListener("click", function () {
+                      window.location.href = `detail.html?id=${item.product_Image}`;
+                      console.log(item.ID);
+                    });
+                  }
+        
+// // Check and change src for button-1
+    if (child.tagName === "BUTTON" && child.id.includes("button-1")) {
+    child.value = item.id; // Set the new src
+    child.dataset.id = item.id;
+    }          
+// // Check and change src for button-1
+                   if (child.id.includes("button-1")) {
+                    child.addEventListener("click", function () {
                       window.location.href = `detail.html?id=${item.id}`;
-                      console.log(item);
+                      console.log(item.ID);
                     });
                   }
 

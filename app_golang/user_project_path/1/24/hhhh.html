@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hhhh</title>
+    <style>
+        body {
+            margin: 0;
+            /* ลบ margin ที่มีอยู่ตามทั่วไป */
+            padding: 0;
+            /* ลบ padding ที่มีอยู่ตามทั่วไป */
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div id="row-1" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-between items-center" draggable="true"><input type="text" id="input-1" name placeholder draggable="true"><input type="text" id="input-2" name="" placeholder="" draggable="true"><input type="text" id="input-3" name="" placeholder="" draggable="true"><input type="text" id="input-4" name="" placeholder="" draggable="true"><input type="text" id="input-5" name="" placeholder="" draggable="true"><input type="text" id="input-6" name="" placeholder="" draggable="true"><input type="text" id="input-7" name="" placeholder="" draggable="true"><button id="button-1" class="bg-blue-500 text-white font-bold py-2 px-4 rounded" type="button" draggable="true" onclick="try{ add_bbok(); }catch(e){ console.error('Error:', e); }">Button</button></div>
+        <div id="row-2" class="flex flex-row flex-wrap p-1 w-full  max-h-full bg-slate-400" draggable="true">
+            <div id="row-3" class="flex flex-row flex-wrap p-1 w-full  max-h-full bg-slate-400" draggable="true"><input type="text" id="input-8" name="" placeholder="" draggable="true"><button id="button-2" class="bg-blue-500 text-white font-bold py-2 px-4 rounded" type="button" draggable="true" onclick="try{ delete_book(); }catch(e){ console.error('Error:', e); }">Button</button></div>
+        </div>
+        <div id="col-1" class="flex flex-col flex-wrap p-1 w-full  max-h-full bg-slate-200" draggable="true"><input type="text" id="input-9" name="" placeholder="" draggable="true"><input type="text" id="input-10" name="" placeholder="" draggable="true"><input type="text" id="input-11" name="" placeholder="" draggable="true"><input type="text" id="input-12" name="" placeholder="" draggable="true"><button id="button-3" class="bg-blue-500 text-white font-bold py-2 px-4 rounded" type="button" draggable="true" onclick="try{ update_book(); }catch(e){ console.error('Error:', e); }">Button</button></div>
+    </div>
+    <script src="hhhh.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>
