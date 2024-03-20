@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <style>
+        body {
+            margin: 0;
+            /* ลบ margin ที่มีอยู่ตามทั่วไป */
+            padding: 0;
+            /* ลบ padding ที่มีอยู่ตามทั่วไป */
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div id="main" style="color: #FF8530;">
+        <div id="row-1" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 justify-center h-14" draggable="true" style="background-color: #3E3D42;">
+            <div id="row-2" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 justify-between w-10/12" draggable="true" style="background-color: #3E3D42;">
+                <div id="row-3" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center w-40" draggable="true" style="background-color: #3E3D42;"><img id="image-1" alt="image-1" src="https://i.ibb.co/C00v4Bz/logo-removebg-preview.png" draggable="true" class="h-full w-4/12" style="background-color: #FFFFFF;">
+                    <p id="text-1" class="text-black font-bold font-Cuprum text-3xl" draggable="true" style="background-color: #; color: #FAFAFA; margin-left: 10px;">KMITL</p>
+                </div>
+                <div id="row-4" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 items-center justify-end w-5/12" draggable="true" style="margin-right: 20px; background-color: #3E3D42;">
+                    <div id="row-5" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 justify-between w-11/12" draggable="true" style="background-color: #3E3D42;"><a href="https://www.w3schools.com" id="link-1" class="text-sky-600 font-Cuprum text-lg" onClick="return false" draggable="true" style="color: #FFFFFF;">Announcement</a><a href="https://www.w3schools.com" id="link-2" class="text-sky-600 font-Cuprum text-lg" onClick="return false" draggable="true" style="color: #FFFFFF;">Hall of Fame</a><select id="select-1" draggable="true" style="background-color: #3E3D42; color: #FFFFFF;" class="font-Cuprum text-lg">
+                            <option id="option-1" value="null">Student</option>
+                        </select><select id="select-2" draggable="true" class="font-Cuprum text-lg" style="background-color: #3E3D42; color: #FFFFFF;">
+                            <option id="option-2" value="null">Faculty</option>
+                        </select><select id="select-3" draggable="true" style="background-color: #3E3D42; color: #FFFFFF;" class="font-Cuprum text-lg">
+                            <option id="option-3" value="null">Abount US</option>
+                        </select></div>
+                </div>
+            </div>
+        </div>
+        <div id="row-6" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 h-auto" draggable="true" style="background-color: #FF8530;"></div>
+        <div id="row-7" class="flex flex-row flex-wrap p-1 w-full bg-slate-400 justify-center h-auto" draggable="true" style="margin-top: 20px; color: #000000; background-color: #FFFFFF;">
+            <div id="row-8" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-9/12" draggable="true" style="background-color: #FFFFFF;"><img id="image-2" alt="image-2" src="https://i.ibb.co/5ntMzRC/banner.png" draggable="true" class="w-full h-full" style="margin-top: px;"></div>
+        </div>
+        <div id="row-9" class="flex flex-row flex-wrap p-1 w-full  max-h-full bg-slate-400" draggable="true" style="margin-top: 20px; background-color: #FFFFFF;">
+            <div id="row-10" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center" draggable="true" style="background-color: #FFFFFF;">
+                <div id="row-11" class="flex flex-row flex-wrap p-1 max-h-full bg-slate-400 w-9/12" draggable="true" style="background-color: #FFFFFF;">
+                    <div id="row-12" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-between items-center" draggable="true" style="background-color: #FFFFFF;"><a href="https://www.w3schools.com" id="link-3" class="text-sky-600 font-Cuprum font-bold text-xl" onClick="return false" draggable="true" style="background-color: #FFFFFF; color: #FF8530;">ข่าวประชาสัมพันธ์</a><a href="https://www.w3schools.com" id="link-4" class="text-sky-600 font-Cuprum text-base" onClick="return false" draggable="true" style="color: #FF8530;">อ่านเพิ่มเติม >>></a></div>
+                    <div id="row-13" class="flex flex-row flex-wrap p-1 w-full  max-h-full bg-slate-400" draggable="true" style="background-color: #FFFFFF; border-width: 1px; border-radius: 5px;">
+                        <div id="row-16" class="flex flex-row flex-wrap p-1 bg-slate-400 h-10 items-center justify-between w-full" draggable="true" style="background-color: #FFFFFF;">
+                            <p id="name" class="text-black" draggable="true">คู่มือการใช้เว็บภาควิชาวิศวกรรมคอมพิวเตอร์</p>
+                            <p id="DATE" class="text-black" draggable="true">31/05/2022</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="home.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add_book</title>
+    <style>
+        body {
+            margin: 0;
+            /* ลบ margin ที่มีอยู่ตามทั่วไป */
+            padding: 0;
+            /* ลบ padding ที่มีอยู่ตามทั่วไป */
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div id="row-1" class="flex flex-row flex-wrap p-1 w-full max-h-full bg-slate-400 justify-center" draggable="true" style="background-color: #B4EED3;">
+            <div id="row-3" class="flex flex-row flex-wrap p-1 bg-slate-400 items-center justify-evenly w-6/12 h-24" draggable="true" style="background-color: #B4EED3;">
+                <p id="Name-Text" class="text-black text-2xl font-bold" draggable="true">ชื่อข่าว</p><input type="text" id="Name-Input" name placeholder draggable="true">
+                <p id="Date-Text" class="text-black text-2xl font-bold" draggable="true">วันที่</p><input type="text" id="Date-Input" name placeholder draggable="true">
+                <p id="News-Text" class="text-black text-2xl font-bold" draggable="true">เนื้อหา</p><input type="text" id="News-Input" name placeholder draggable="true"><button id="Add-BT" class="bg-blue-500 text-white font-bold py-2 px-4 rounded" type="button" draggable="true" onclick="try{ add_news(); }catch(e){ console.error('Error:', e); }">Button</button>
+            </div>
+        </div>
+    </div>
+    <script src="add_book.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>
